@@ -1,0 +1,6 @@
+<main>
+  <router-outlet></router-outlet>
+</main>
+<p>
+  Heypoint v{{ packageVersion + (gitInfo.dirty ? "-next" : "") }}+<a [href]="'https://github.com/heypoint/heypoint/commit/' + gitInfo.hash">{{ gitInfo.hash }}</a>
+</p>

@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "heypoint-94e8e"
+  },
+  "targets": {
+    "heypoint-94e8e": {
+      "hosting": {
+        "heypoint": [
+          "heypoint-94e8e"
+        ]
+      }
+    }
+  }
+}

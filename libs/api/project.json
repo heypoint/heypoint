@@ -1,0 +1,36 @@
+{
+  "name": "api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "assets": [],
+        "main": "libs/api/main.ts",
+        "outputPath": "dist/libs/api",
+        "tsConfig": "libs/api/tsconfig.lib.json",
+        "updateBuildableProjectDepsInPackageJson": false
+      }
+    },
+    "deploy": {
+      "dependsOn": [
+        "build"
+      ],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "firebase deploy --only functions:api"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/api/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

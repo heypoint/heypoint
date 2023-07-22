@@ -1,0 +1,83 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "affected": {
+    "defaultBase": "main"
+  },
+  "defaultProject": "heypoint",
+  "generators": {
+    "@nx/angular:application": {
+      "style": "sass",
+      "linter": "eslint",
+      "unitTestRunner": "none",
+      "e2eTestRunner": "none",
+      "bundler": "esbuild",
+      "prefix": "app",
+      "routing": true,
+      "skipTests": true,
+      "standalone": true
+    },
+    "@nx/angular:component": {
+      "style": "sass",
+      "displayBlock": true,
+      "export": true,
+      "prefix": "heypoint",
+      "project": "components",
+      "skipTests": true,
+      "standalone": true
+    },
+    "@nx/angular:library": {
+      "linter": "eslint",
+      "unitTestRunner": "none",
+      "buildable": true,
+      "displayBlock": true,
+      "publishable": true,
+      "skipModule": true,
+      "skipTests": true,
+      "standalone": true,
+      "style": "sass"
+    },
+    "@nx/js:library": {
+      "bundler": "esbuild",
+      "linter": "eslint",
+      "minimal": true,
+      "publishable": true,
+      "unitTestRunner": "none"
+    }
+  },
+  "namedInputs": {
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
+    "sharedGlobals": [],
+    "production": [
+      "default",
+      "!{projectRoot}/.eslintrc.json"
+    ]
+  },
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    },
+    "lint": {
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintignore"
+      ]
+    }
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx-cloud",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "lint"
+        ],
+        "accessToken": "${NX_CLOUD_ACCESS_TOKEN}"
+      }
+    }
+  }
+}
