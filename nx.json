@@ -45,15 +45,9 @@
     }
   },
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": [],
-    "production": [
-      "default",
-      "!{projectRoot}/.eslintrc.json"
-    ]
+    "production": ["default", "!{projectRoot}/.eslintrc.json"]
   },
   "targetDefaults": {
     "build": {
@@ -72,10 +66,7 @@
     "default": {
       "runner": "nx-cloud",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint"
-        ],
+        "cacheableOperations": ["build", "lint"],
         "accessToken": "${NX_CLOUD_ACCESS_TOKEN}"
       }
     }

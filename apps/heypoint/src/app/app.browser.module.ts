@@ -12,7 +12,7 @@ import { RouterModule }                                                         
 import { TransferHttpCacheModule }                                                               from "@nguniversal/common";
 import { environment }                                                                           from "../environments/environment";
 import { AppComponent }                                                                          from "./app.component";
-import { AppCheckOptionsService }                                                                from "./services";
+import { AppCheckOptionsService }                                                                from "@heypoint/services";
 
 
 const baseTitle = "Heypoint";

@@ -1,10 +1,11 @@
-import { CommonModule, isPlatformBrowser }                     from "@angular/common";
-import { HttpClient, HttpClientJsonpModule, HttpClientModule } from "@angular/common/http";
-import { Component, Inject, PLATFORM_ID, signal, Signal }      from "@angular/core";
-import { toSignal }                                            from "@angular/core/rxjs-interop";
-import { GoogleMapsModule }                                    from "@angular/google-maps";
-import { catchError, map, Observable, of, startWith }          from "rxjs";
-import { environment }                                         from "../../../../environments/environment";
+import { CommonModule, isPlatformBrowser }                          from "@angular/common";
+import { HttpClient, HttpClientJsonpModule, HttpClientModule }      from "@angular/common/http";
+import { Component, computed, Inject, PLATFORM_ID, signal, Signal } from "@angular/core";
+import { toSignal }                                                 from "@angular/core/rxjs-interop";
+import { GoogleMapsModule }                                         from "@angular/google-maps";
+import { GeolocationService }                                       from "@heypoint/services";
+import { catchError, map, Observable, of, startWith }               from "rxjs";
+import { environment }                                              from "../../../../environments/environment";
 
 
 @Component({
@@ -24,8 +25,11 @@ import { environment }                                         from "../../../..
 export class HomeComponent {
 
   public readonly googleMapsAPILoaded: Signal<boolean>;
+  public readonly mapOptions: Signal<google.maps.MapOptions>;
 
   constructor(
+    public readonly geolocationService: GeolocationService,
+
     @Inject(PLATFORM_ID)
     private readonly platformId: object,
 
@@ -39,6 +43,17 @@ export class HomeComponent {
       ), {
         requireSync: true,
       }) : signal<boolean>(false);
+
+    this
+      .mapOptions = computed<google.maps.MapOptions>((): google.maps.MapOptions => {
+        return {
+          center: this.geolocationService.geolocation(),
+          clickableIcons: false,
+          disableDefaultUI: true,
+          gestureHandling: "greedy",
+          mapId: "f548c074ff2b28a2"
+        }
+      });
   }
 
 }

@@ -1,8 +1,8 @@
 import { CommonModule, isPlatformBrowser }          from "@angular/common";
 import { Component, Inject, Optional, PLATFORM_ID } from "@angular/core";
 import { RESPONSE }                                 from "@nguniversal/express-engine/tokens";
-import { Response }    from "express"
-import { PathService } from "../../../services";
+import { Response }                                 from "express"
+import { PathService }                              from "@heypoint/services";
 
 
 @Component({

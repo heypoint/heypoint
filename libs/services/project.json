@@ -1,0 +1,36 @@
+{
+  "name": "services",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/services/src",
+  "prefix": "heypoint",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/services/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/services/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/services/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/services/**/*.ts",
+          "libs/services/**/*.html"
+        ]
+      }
+    }
+  }
+}
