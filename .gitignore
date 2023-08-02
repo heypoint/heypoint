@@ -14,5 +14,5 @@ tmp
 gha-creds-*.json
 
 # Version side-effect files
-apps/*/src/git-info.ts
-apps/*/src/package-version.ts
+apps/heypoint/src/.git-info.ts
+apps/heypoint/src/.package-version.ts

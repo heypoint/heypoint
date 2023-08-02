@@ -11,8 +11,8 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/heypoint/heypoint.git",
-    "directory": "libs/types/package.json"
+    "directory": "libs/types"
   },
   "private": true,
-  "type": "commonjs"
+  "type": "module"
 }

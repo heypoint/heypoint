@@ -1,35 +1,45 @@
 {
-  "extends": ["../../.eslintrc.json"],
-  "ignorePatterns": ["!**/*"],
+  "extends": [
+    "../../.eslintrc.json"
+  ],
+  "ignorePatterns": [
+    "!**/*"
+  ],
   "overrides": [
     {
-      "files": ["*.ts"],
-      "rules": {
-        "@angular-eslint/directive-selector": [
-          "error",
-          {
-            "type": "attribute",
-            "prefix": "heypoint",
-            "style": "camelCase"
-          }
-        ],
-        "@angular-eslint/component-selector": [
-          "error",
-          {
-            "type": "element",
-            "prefix": "heypoint",
-            "style": "kebab-case"
-          }
-        ]
-      },
       "extends": [
         "plugin:@nx/angular",
         "plugin:@angular-eslint/template/process-inline-templates"
-      ]
+      ],
+      "files": [
+        "*.ts"
+      ],
+      "rules": {
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "prefix": "heypoint",
+            "style": "kebab-case",
+            "type": "element"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "prefix": "heypoint",
+            "style": "camelCase",
+            "type": "attribute"
+          }
+        ]
+      }
     },
     {
-      "files": ["*.html"],
-      "extends": ["plugin:@nx/angular-template"],
+      "extends": [
+        "plugin:@nx/angular-template"
+      ],
+      "files": [
+        "*.html"
+      ],
       "rules": {}
     }
   ]

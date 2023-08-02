@@ -11,15 +11,8 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/heypoint/heypoint.git",
-    "directory": "libs/components/package.json"
+    "directory": "libs/components"
   },
   "private": true,
-  "peerDependencies": {
-    "@angular/common": "^16.0.0",
-    "@angular/core": "^16.0.0"
-  },
-  "dependencies": {
-    "tslib": "^2.3.0"
-  },
   "sideEffects": false
 }

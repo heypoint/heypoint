@@ -1,4 +1,7 @@
-export const environment = {
+import { AppEnvironment } from "@heypoint/types";
+
+
+export const environment: AppEnvironment = {
   app: "heypoint",
   firebase: {
     apiKey: "AIzaSyCY9EDjGBsg5VofEM_LSW7wcr4lWNWyWQg",

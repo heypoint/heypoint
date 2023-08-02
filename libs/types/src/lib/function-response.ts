@@ -1,3 +1,3 @@
 export interface FunctionResponse {
-  message: string
+  message: string,
 }

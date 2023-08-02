@@ -1,0 +1,32 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "injection-tokens",
+  "projectType": "library",
+  "sourceRoot": "libs/injection-tokens/src",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/injection-tokens/**/*.ts"
+        ]
+      },
+      "outputs": [
+        "{options.outputFile}"
+      ]
+    },
+    "build": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "assets": [],
+        "main": "libs/injection-tokens/src/index.ts",
+        "outputPath": "dist/libs/injection-tokens",
+        "tsConfig": "libs/injection-tokens/tsconfig.lib.json"
+      },
+      "outputs": [
+        "{options.outputPath}"
+      ]
+    }
+  }
+}

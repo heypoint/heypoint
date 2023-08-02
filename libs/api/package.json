@@ -11,7 +11,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/heypoint/heypoint.git",
-    "directory": "libs/api/package.json"
+    "directory": "libs/api"
   },
   "private": true,
   "engines": {
@@ -19,6 +19,6 @@
   },
   "main": "./main.js",
   "dependencies": {
-    "firebase-functions": "^4"
+    "firebase-functions": "^4.4.1"
   }
 }

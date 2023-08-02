@@ -6,38 +6,36 @@
   "defaultProject": "heypoint",
   "generators": {
     "@nx/angular:application": {
-      "style": "sass",
-      "linter": "eslint",
-      "unitTestRunner": "none",
       "e2eTestRunner": "none",
-      "bundler": "esbuild",
+      "linter": "eslint",
       "prefix": "app",
       "routing": true,
       "skipTests": true,
-      "standalone": true
+      "standalone": true,
+      "style": "sass",
+      "unitTestRunner": "none"
     },
     "@nx/angular:component": {
-      "style": "sass",
       "displayBlock": true,
       "export": true,
       "prefix": "heypoint",
       "project": "components",
       "skipTests": true,
-      "standalone": true
+      "standalone": true,
+      "style": "sass"
     },
     "@nx/angular:library": {
-      "linter": "eslint",
-      "unitTestRunner": "none",
       "buildable": true,
       "displayBlock": true,
+      "linter": "eslint",
       "publishable": true,
       "skipModule": true,
       "skipTests": true,
       "standalone": true,
-      "style": "sass"
+      "style": "sass",
+      "unitTestRunner": "none"
     },
     "@nx/js:library": {
-      "bundler": "esbuild",
       "linter": "eslint",
       "minimal": true,
       "publishable": true,
@@ -45,9 +43,15 @@
     }
   },
   "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "sharedGlobals": [],
-    "production": ["default", "!{projectRoot}/.eslintrc.json"]
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
+    "production": [
+      "default",
+      "!{projectRoot}/.eslintrc.json"
+    ],
+    "sharedGlobals": []
   },
   "targetDefaults": {
     "build": {
@@ -64,11 +68,16 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "lint"],
-        "accessToken": "${NX_CLOUD_ACCESS_TOKEN}"
-      }
+        "accessToken": "${NX_CLOUD_ACCESS_TOKEN}",
+        "cacheableOperations": [
+          "lint",
+          "browser",
+          "server",
+          "build"
+        ]
+      },
+      "runner": "nx-cloud"
     }
   }
 }

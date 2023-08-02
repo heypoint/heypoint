@@ -3,10 +3,16 @@ import { FunctionResponse }                        from "@heypoint/types";
 
 
 // noinspection JSUnusedGlobalSymbols
-export const endpoint: HttpsFunction = runWith({
-  enforceAppCheck: true,
-})
+export const endpoint: HttpsFunction = runWith(
+  {
+    enforceAppCheck: true,
+  },
+)
   .https
-  .onRequest((request: https.Request, response: Response<FunctionResponse>): void => response.send({
-    message: "hello world"
-  }).end() && void(0));
+  .onRequest(
+    (request: https.Request, response: Response<FunctionResponse>): void => response.send(
+      {
+        message: "hello world"
+      },
+    ).end() && void(0),
+  );
