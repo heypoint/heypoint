@@ -4,7 +4,7 @@ import { Component, computed, Inject, PLATFORM_ID, signal, Signal }             
 import { takeUntilDestroyed, toSignal }                                                   from "@angular/core/rxjs-interop";
 import { GoogleMapsModule }                                                               from "@angular/google-maps";
 import { APP_ENVIRONMENT }                                                                from "@heypoint/injection-tokens";
-import { GeolocationService }                                                             from "@heypoint/services";
+import { GeolocationService, ResponsivityService }                                        from "@heypoint/services";
 import { AppEnvironment }                                                                 from "@heypoint/types";
 import { map, merge, Observable, Observer, startWith, Subject, switchMap, TeardownLogic } from "rxjs";
 
@@ -35,8 +35,9 @@ export class MapComponent {
     @Inject(APP_ENVIRONMENT) appEnvironment: AppEnvironment,
     @Inject(PLATFORM_ID)     platformId:     object,
 
-    geolocationService: GeolocationService,
-    httpClient:         HttpClient,
+    geolocationService:  GeolocationService,
+    httpClient:          HttpClient,
+    responsivityService: ResponsivityService,
   ) {
     this
       .googleMapsAPILoaded = isPlatformBrowser(platformId) ? toSignal<boolean>(
@@ -66,7 +67,7 @@ export class MapComponent {
           clickableIcons:   false,
           disableDefaultUI: true,
           gestureHandling:  "greedy",
-          mapId:            "f548c074ff2b28a2",
+          mapId:            responsivityService.colorScheme() == "light" ? "4658b3e01cedf4cb" : "28b46c4c6bed5a4",
           maxZoom:          20,
           minZoom:          10,
         }),
