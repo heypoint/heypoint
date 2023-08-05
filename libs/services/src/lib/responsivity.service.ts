@@ -1,7 +1,7 @@
 import { BreakpointObserver, BreakpointState }             from "@angular/cdk/layout";
 import { DOCUMENT, isPlatformBrowser }                     from "@angular/common";
 import { Inject, Injectable, PLATFORM_ID, signal, Signal } from "@angular/core";
-import { takeUntilDestroyed, toSignal }                    from "@angular/core/rxjs-interop";
+import { toSignal }                                        from "@angular/core/rxjs-interop";
 import { fromEvent, map, startWith }                       from "rxjs";
 
 
@@ -23,9 +23,8 @@ export class ResponsivityService {
   ) {
     this
       .colorScheme = isPlatformBrowser(platformId) ? toSignal<ColorScheme>(
-        breakpointObserver.observe("(prefers-color-scheme: light)").pipe<ColorScheme, ColorScheme>(
+        breakpointObserver.observe("(prefers-color-scheme: light)").pipe<ColorScheme>(
           map<BreakpointState, ColorScheme>((breakpointState: BreakpointState): ColorScheme => breakpointState.matches ? "light" : "dark"),
-          takeUntilDestroyed<ColorScheme>(),
         ),
         {
           requireSync: true,
@@ -36,10 +35,9 @@ export class ResponsivityService {
         fromEvent<Event>(
           document,
           "scroll",
-        ).pipe<number, number, number>(
+        ).pipe<number, number>(
           map<Event, number>((): number => document.defaultView?.scrollY || 0),
           startWith<number>(document.defaultView?.scrollY || 0),
-          takeUntilDestroyed<number>(),
         ),
         {
           requireSync: true,

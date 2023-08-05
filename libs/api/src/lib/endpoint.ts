@@ -1,4 +1,3 @@
-import { FunctionResponse }                        from "@heypoint/types";
 import { https, HttpsFunction, Response, runWith } from "firebase-functions";
 
 
@@ -10,7 +9,7 @@ export const endpoint: HttpsFunction = runWith(
 )
   .https
   .onRequest(
-    (request: https.Request, response: Response<FunctionResponse>): void => response.send(
+    (request: https.Request, response: Response<unknown>): void => response.send(
       {
         message: "hello world"
       },

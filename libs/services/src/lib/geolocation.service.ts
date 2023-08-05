@@ -1,6 +1,6 @@
 import { isPlatformBrowser }                               from "@angular/common";
 import { Inject, Injectable, PLATFORM_ID, Signal, signal } from "@angular/core";
-import { takeUntilDestroyed, toSignal }                    from "@angular/core/rxjs-interop";
+import { toSignal }                                        from "@angular/core/rxjs-interop";
 import { Observable, Observer, startWith, TeardownLogic }  from "rxjs";
 
 
@@ -26,9 +26,8 @@ export class GeolocationService {
               },
             ),
           ),
-        ).pipe<GeolocationPosition | null, GeolocationPosition | null>(
+        ).pipe<GeolocationPosition | null>(
           startWith<GeolocationPosition | null>(null),
-          takeUntilDestroyed<GeolocationPosition | null>(),
         ),
         {
           requireSync: true,

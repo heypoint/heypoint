@@ -1,6 +1,6 @@
 import { Location }                                                                                                                                                                                                                                                                                         from "@angular/common";
 import { Injectable, Signal }                                                                                                                                                                                                                                                                               from "@angular/core";
-import { takeUntilDestroyed, toSignal }                                                                                                                                                                                                                                                                     from "@angular/core/rxjs-interop";
+import { toSignal }                                                                                                                                                                                                                                                                                         from "@angular/core/rxjs-interop";
 import { ActivationEnd, ActivationStart, ChildActivationEnd, ChildActivationStart, GuardsCheckEnd, GuardsCheckStart, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, ResolveEnd, ResolveStart, RouteConfigLoadEnd, RouteConfigLoadStart, Router, RouterEvent, RoutesRecognized, Scroll } from "@angular/router";
 import { filter, map, startWith }                                                                                                                                                                                                                                                                           from "rxjs";
 
@@ -18,7 +18,7 @@ export class PathService {
   ) {
     this
       .path = toSignal<string>(
-        router.events.pipe<NavigationEnd, string, string, string>(
+        router.events.pipe<NavigationEnd, string, string>(
           filter<RouterEvent | NavigationStart | NavigationEnd | NavigationCancel | NavigationError | RoutesRecognized | GuardsCheckStart | GuardsCheckEnd | RouteConfigLoadStart | RouteConfigLoadEnd | ChildActivationStart | ChildActivationEnd | ActivationStart | ActivationEnd | Scroll | ResolveStart | ResolveEnd, NavigationEnd>(
             (routerEvent: RouterEvent | NavigationStart | NavigationEnd | NavigationCancel | NavigationError | RoutesRecognized | GuardsCheckStart | GuardsCheckEnd | RouteConfigLoadStart | RouteConfigLoadEnd | ChildActivationStart | ChildActivationEnd | ActivationStart | ActivationEnd | Scroll | ResolveStart | ResolveEnd): routerEvent is NavigationEnd => routerEvent instanceof NavigationEnd,
           ),
@@ -28,7 +28,6 @@ export class PathService {
           startWith<string>(
             location.path(),
           ),
-          takeUntilDestroyed<string>(),
         ),
         {
           requireSync: true,

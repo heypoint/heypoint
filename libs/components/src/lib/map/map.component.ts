@@ -1,7 +1,7 @@
 import { CommonModule, isPlatformBrowser }                                                from "@angular/common";
 import { HttpClient, HttpClientJsonpModule, HttpClientModule }                            from "@angular/common/http";
 import { Component, computed, Inject, PLATFORM_ID, signal, Signal }                       from "@angular/core";
-import { takeUntilDestroyed, toSignal }                                                   from "@angular/core/rxjs-interop";
+import { toSignal }                                                                       from "@angular/core/rxjs-interop";
 import { GoogleMapsModule }                                                               from "@angular/google-maps";
 import { APP_ENVIRONMENT }                                                                from "@heypoint/injection-tokens";
 import { GeolocationService, ResponsivityService }                                        from "@heypoint/services";
@@ -25,10 +25,12 @@ import { map, merge, Observable, Observer, startWith, Subject, switchMap, Teardo
 })
 export class MapComponent {
 
-  public readonly googleMapsAPILoaded: Signal<boolean>;
-  public readonly map:                 Subject<google.maps.Map>;
-  public readonly mapOptions:          Signal<google.maps.MapOptions>;
+  public readonly googleMapsAPILoaded:   Signal<boolean>;
+  public readonly mapOptions:            Signal<google.maps.MapOptions>;
 
+  public readonly mapInitializedHandler: (map: google.maps.Map) => void;
+
+  private readonly map:                   Subject<google.maps.Map>;
   private readonly mapGeolocationEngaged: Signal<boolean>;
 
   constructor(
@@ -44,12 +46,11 @@ export class MapComponent {
         httpClient.jsonp(
           "https://maps.googleapis.com/maps/api/js?key=" + appEnvironment.firebase.apiKey,
           "callback",
-        ).pipe<boolean, boolean, boolean>(
+        ).pipe<boolean, boolean>(
           map<unknown, boolean>(
             (): boolean => true,
           ),
           startWith<boolean>(false),
-          takeUntilDestroyed<boolean>(),
         ),
         {
           requireSync: true,
@@ -72,12 +73,16 @@ export class MapComponent {
           minZoom:          10,
         }),
         {
-          equal: (mapOptionsA: google.maps.MapOptions, mapOptionsB: google.maps.MapOptions): boolean => mapOptionsA.center ? this.mapGeolocationEngaged() ? JSON.stringify(mapOptionsA.center) !== JSON.stringify(mapOptionsB.center) : true : false,
+          equal: (mapOptionsA: google.maps.MapOptions, mapOptionsB: google.maps.MapOptions): boolean => mapOptionsA.center ? this.mapGeolocationEngaged() ? mapOptionsA.center.lat !== mapOptionsB.center?.lat || mapOptionsA.center.lng !== mapOptionsB.center?.lng : true : false,
         },
       );
     this
+      .mapInitializedHandler = (map: google.maps.Map): void => this
+      .map
+      .next(map);
+    this
       .mapGeolocationEngaged = isPlatformBrowser(platformId) ? toSignal<boolean>(
-        this.map.asObservable().pipe<boolean, boolean, boolean>(
+        this.map.asObservable().pipe<boolean, boolean>(
           switchMap<google.maps.Map, Observable<boolean>>(
             (map: google.maps.Map): Observable<boolean> => merge<[boolean, boolean, boolean, boolean]>(
               new Observable<boolean>((mapsEventObserver: Observer<boolean>): TeardownLogic => map.addListener(
@@ -99,7 +104,6 @@ export class MapComponent {
             ),
           ),
           startWith<boolean>(true),
-          takeUntilDestroyed<boolean>(),
         ),
         {
           requireSync: true,
