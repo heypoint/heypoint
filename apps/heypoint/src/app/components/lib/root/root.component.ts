@@ -4,9 +4,9 @@ import { GitInfo }                   from "git-describe";
 
 
 @Component({
-  selector: "app-root",
-  styleUrls: [
-    "./root.component.sass"
+  selector:    "app-root",
+  styleUrls:   [
+    "./root.component.sass",
   ],
   templateUrl: "./root.component.html",
 })
@@ -15,6 +15,7 @@ export class RootComponent {
   constructor(
     @Inject(GIT_INFO)        public readonly gitInfo: Partial<GitInfo>,
     @Inject(PACKAGE_VERSION) public readonly packageVersion: string,
-  ) {}
+  ) {
+  }
 
 }

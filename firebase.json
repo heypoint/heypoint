@@ -1,56 +1,56 @@
 {
   "extensions": {},
-  "firestore": {
+  "firestore":  {
     "indexes": "firestore.indexes.json",
-    "rules": "firestore.rules"
+    "rules":   "firestore.rules"
   },
-  "functions": [
+  "functions":  [
     {
       "codebase": "api",
-      "ignore": [
+      "ignore":   [
         "node_modules",
         ".git",
         "firebase-debug.log",
         "firebase-debug.*.log"
       ],
-      "runtime": "nodejs18",
-      "source": "dist/libs/api"
+      "runtime":  "nodejs18",
+      "source":   "dist/libs/api"
     }
   ],
-  "hosting": {
-    "headers": [
+  "hosting":    {
+    "headers":  [
       {
         "headers": [
           {
-            "key": "Cache-Control",
+            "key":   "Cache-Control",
             "value": "public,max-age=31536000,immutable"
           }
         ],
-        "source": "*.[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].+(css|js)"
+        "source":  "*.[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].+(css|js)"
       },
       {
         "headers": [
           {
-            "key": "Cache-Control",
+            "key":   "Cache-Control",
             "value": "no-cache"
           }
         ],
-        "source": "/@(ngsw-worker.js|ngsw.json)"
+        "source":  "/@(ngsw-worker.js|ngsw.json)"
       }
     ],
-    "ignore": [
+    "ignore":   [
       "**/.*"
     ],
-    "public": "dist/apps/heypoint/browser",
+    "public":   "dist/apps/heypoint/browser",
     "rewrites": [
       {
-        "run": {
-          "pinTag": true,
+        "run":    {
+          "pinTag":    true,
           "serviceId": "ssr-heypoint"
         },
         "source": "**"
       }
     ],
-    "target": "heypoint"
+    "target":   "heypoint"
   }
 }

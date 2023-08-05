@@ -1,64 +1,69 @@
 {
-  "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "affected": {
+  "$schema":            "./node_modules/nx/schemas/nx-schema.json",
+  "affected":           {
     "defaultBase": "main"
   },
-  "defaultProject": "heypoint",
-  "generators": {
+  "defaultProject":     "heypoint",
+  "generators":         {
     "@nx/angular:application": {
-      "e2eTestRunner": "none",
-      "linter": "eslint",
-      "prefix": "app",
-      "routing": true,
-      "skipTests": true,
-      "standalone": true,
-      "style": "sass",
+      "e2eTestRunner":  "none",
+      "linter":         "eslint",
+      "prefix":         "app",
+      "routing":        true,
+      "skipTests":      true,
+      "standalone":     true,
+      "style":          "sass",
       "unitTestRunner": "none"
     },
-    "@nx/angular:component": {
+    "@nx/angular:component":   {
       "displayBlock": true,
-      "export": true,
-      "prefix": "heypoint",
-      "project": "components",
-      "skipTests": true,
-      "standalone": true,
-      "style": "sass"
+      "export":       true,
+      "prefix":       "heypoint",
+      "project":      "components",
+      "skipTests":    true,
+      "standalone":   true,
+      "style":        "sass"
     },
-    "@nx/angular:library": {
-      "buildable": true,
-      "displayBlock": true,
-      "linter": "eslint",
-      "publishable": true,
-      "skipModule": true,
-      "skipTests": true,
-      "standalone": true,
-      "style": "sass",
+    "@nx/angular:library":     {
+      "buildable":      true,
+      "displayBlock":   true,
+      "linter":         "eslint",
+      "publishable":    true,
+      "skipModule":     true,
+      "skipTests":      true,
+      "standalone":     true,
+      "style":          "sass",
       "unitTestRunner": "none"
     },
-    "@nx/js:library": {
-      "linter": "eslint",
-      "minimal": true,
-      "publishable": true,
+    "@nx/js:library":          {
+      "linter":         "eslint",
+      "minimal":        true,
+      "publishable":    true,
       "unitTestRunner": "none"
     }
   },
-  "namedInputs": {
-    "default": [
+  "namedInputs":        {
+    "default":       [
       "{projectRoot}/**/*",
       "sharedGlobals"
     ],
-    "production": [
+    "production":    [
       "default",
       "!{projectRoot}/.eslintrc.json"
     ],
     "sharedGlobals": []
   },
-  "targetDefaults": {
+  "targetDefaults":     {
     "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs":    [
+        "production",
+        "^production"
+      ]
     },
-    "lint": {
+    "lint":  {
       "inputs": [
         "default",
         "{workspaceRoot}/.eslintrc.json",
@@ -69,7 +74,7 @@
   "tasksRunnerOptions": {
     "default": {
       "options": {
-        "accessToken": "${NX_CLOUD_ACCESS_TOKEN}",
+        "accessToken":         "${NX_CLOUD_ACCESS_TOKEN}",
         "cacheableOperations": [
           "lint",
           "browser",
@@ -77,7 +82,7 @@
           "build"
         ]
       },
-      "runner": "nx-cloud"
+      "runner":  "nx-cloud"
     }
   }
 }

@@ -1,68 +1,68 @@
 {
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "name": "heypoint",
-  "prefix": "app",
+  "$schema":     "../../node_modules/nx/schemas/project-schema.json",
+  "name":        "heypoint",
+  "prefix":      "app",
   "projectType": "application",
-  "sourceRoot": "apps/heypoint/src",
-  "tags": [],
-  "targets": {
-    "lint": {
+  "sourceRoot":  "apps/heypoint/src",
+  "tags":        [],
+  "targets":     {
+    "lint":     {
       "executor": "@nx/linter:eslint",
-      "options": {
+      "options":  {
         "lintFilePatterns": [
           "apps/heypoint/**/*.ts",
           "apps/heypoint/**/*.html"
         ]
       },
-      "outputs": [
+      "outputs":  [
         "{options.outputFile}"
       ]
     },
     "prebuild": {
       "executor": "nx:run-commands",
-      "options": {
+      "options":  {
         "command": "node -p \"'export const packageVersion = ' + JSON.stringify(require('./package.json').version) + ';'\" > apps/heypoint/src/.package-version.ts && node -p \"'import { GitInfo } from \\'git-describe\\';\\n\\n\\nexport const gitInfo: Partial<GitInfo> = ' + JSON.stringify(((gitInfo) => ({dirty: gitInfo.dirty,hash: gitInfo.hash}))(require('git-describe').gitDescribeSync())) + ';'\" > apps/heypoint/src/.git-info.ts"
       }
     },
-    "browser": {
-      "configurations": {
+    "browser":  {
+      "configurations":       {
         "development": {
-          "buildOptimizer": false,
+          "buildOptimizer":  false,
           "extractLicenses": false,
-          "namedChunks": true,
-          "optimization": true,
-          "sourceMap": true,
-          "vendorChunk": true
+          "namedChunks":     true,
+          "optimization":    true,
+          "sourceMap":       true,
+          "vendorChunk":     true
         },
-        "production": {
-          "budgets": [
+        "production":  {
+          "budgets":          [
             {
-              "maximumError": "1mb",
+              "maximumError":   "1mb",
               "maximumWarning": "500kb",
-              "type": "initial"
+              "type":           "initial"
             },
             {
-              "maximumError": "4kb",
+              "maximumError":   "4kb",
               "maximumWarning": "2kb",
-              "type": "anyComponentStyle"
+              "type":           "anyComponentStyle"
             }
           ],
           "fileReplacements": [
             {
               "replace": "apps/heypoint/src/environment.ts",
-              "with": "apps/heypoint/src/environment.production.ts"
+              "with":    "apps/heypoint/src/environment.production.ts"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing":    "all"
         }
       },
       "defaultConfiguration": "production",
-      "dependsOn": [
+      "dependsOn":            [
         "prebuild"
       ],
-      "executor": "@angular-devkit/build-angular:browser",
-      "options": {
-        "assets": [
+      "executor":             "@angular-devkit/build-angular:browser",
+      "options":              {
+        "assets":                      [
           "apps/heypoint/src/robots.txt",
           "apps/heypoint/src/sitemap.xml"
         ],
@@ -70,118 +70,118 @@
           "url",
           "xhr2"
         ],
-        "index": "apps/heypoint/src/index.html",
-        "inlineStyleLanguage": "sass",
-        "main": "apps/heypoint/src/main.browser.ts",
-        "outputPath": "dist/apps/heypoint/browser",
-        "polyfills": "apps/heypoint/src/polyfills.ts",
-        "scripts": [],
-        "styles": [
+        "index":                       "apps/heypoint/src/index.html",
+        "inlineStyleLanguage":         "sass",
+        "main":                        "apps/heypoint/src/main.browser.ts",
+        "outputPath":                  "dist/apps/heypoint/browser",
+        "polyfills":                   "apps/heypoint/src/polyfills.ts",
+        "scripts":                     [],
+        "styles":                      [
           "apps/heypoint/src/styles.sass"
         ],
-        "tsConfig": "apps/heypoint/tsconfig.app.json"
+        "tsConfig":                    "apps/heypoint/tsconfig.app.json"
       },
-      "outputs": [
+      "outputs":              [
         "{options.outputPath}"
       ]
     },
-    "server": {
-      "configurations": {
+    "server":   {
+      "configurations":       {
         "development": {
           "extractLicenses": false,
-          "optimization": false,
-          "sourceMap": true
+          "optimization":    false,
+          "sourceMap":       true
         },
-        "production": {
+        "production":  {
           "fileReplacements": [
             {
               "replace": "apps/heypoint/src/environment.ts",
-              "with": "apps/heypoint/src/environment.production.ts"
+              "with":    "apps/heypoint/src/environment.production.ts"
             }
           ],
-          "outputHashing": "media"
+          "outputHashing":    "media"
         }
       },
       "defaultConfiguration": "production",
-      "dependsOn": [
+      "dependsOn":            [
         "prebuild"
       ],
-      "development": {
+      "development":          {
         "extractLicenses": false,
-        "optimization": false,
-        "sourceMap": true
+        "optimization":    false,
+        "sourceMap":       true
       },
-      "executor": "@angular-devkit/build-angular:server",
-      "options": {
+      "executor":             "@angular-devkit/build-angular:server",
+      "options":              {
         "inlineStyleLanguage": "sass",
-        "main": "apps/heypoint/server.ts",
-        "outputPath": "dist/apps/heypoint/server",
-        "tsConfig": "apps/heypoint/tsconfig.server.json"
+        "main":                "apps/heypoint/server.ts",
+        "outputPath":          "dist/apps/heypoint/server",
+        "tsConfig":            "apps/heypoint/tsconfig.server.json"
       },
-      "production": {
+      "production":           {
         "fileReplacements": [
           {
             "replace": "apps/heypoint/src/environment.ts",
-            "with": "apps/heypoint/src/environment.production.ts"
+            "with":    "apps/heypoint/src/environment.production.ts"
           }
         ],
-        "outputHashing": "media"
+        "outputHashing":    "media"
       }
     },
-    "build": {
-      "configurations": {
+    "build":    {
+      "configurations":       {
         "development": {
           "browserTarget": "heypoint:browser:development",
-          "serverTarget": "heypoint:server:development"
+          "serverTarget":  "heypoint:server:development"
         },
-        "production": {
+        "production":  {
           "browserTarget": "heypoint:browser:production",
-          "serverTarget": "heypoint:server:production"
+          "serverTarget":  "heypoint:server:production"
         }
       },
       "defaultConfiguration": "production",
-      "dependsOn": [
+      "dependsOn":            [
         "prebuild"
       ],
-      "executor": "@nguniversal/builders:prerender",
-      "options": {
+      "executor":             "@nguniversal/builders:prerender",
+      "options":              {
         "routesFile": "apps/heypoint/src/routes.txt"
       }
     },
-    "serve": {
-      "configurations": {
+    "serve":    {
+      "configurations":       {
         "development": {
           "browserTarget": "heypoint:browser:development",
-          "serverTarget": "heypoint:server:development"
+          "serverTarget":  "heypoint:server:development"
         },
-        "production": {
+        "production":  {
           "browserTarget": "heypoint:browser:production",
-          "serverTarget": "heypoint:server:production"
+          "serverTarget":  "heypoint:server:production"
         }
       },
       "defaultConfiguration": "production",
-      "dependsOn": [
+      "dependsOn":            [
         "prebuild"
       ],
-      "executor": "@nguniversal/builders:ssr-dev-server"
+      "executor":             "@nguniversal/builders:ssr-dev-server"
     },
-    "deploy": {
+    "deploy":   {
       "dependsOn": [
         "prebuild"
       ],
-      "executor": "@angular/fire:deploy",
-      "options": {
-        "browserTarget": "heypoint:browser:production",
-        "firebaseHostingSite": "heypoint-94e8e",
-        "firebaseProject": "heypoint-94e8e",
-        "functionName": "ssr-heypoint",
+      "executor":  "@angular/fire:deploy",
+      "options":   {
+        "browserTarget":        "heypoint:browser:production",
+        "firebaseHostingSite":  "heypoint-94e8e",
+        "firebaseProject":      "heypoint-94e8e",
+        "functionName":         "ssr-heypoint",
         "functionsNodeVersion": "18.16",
-        "outputPath": "dist/apps/heypoint/run",
-        "prerender": true,
-        "prerenderTarget": "heypoint:build:production",
-        "region": "us-central1",
-        "serverTarget": "heypoint:server:production",
-        "ssr": "cloud-run"
+        "outputPath":           "dist/apps/heypoint/run",
+        "prerender":            true,
+        "prerenderTarget":      "heypoint:build:production",
+        "region":               "us-central1",
+        "serverTarget":         "heypoint:server:production",
+        "ssr":                  "cloud-run"
       }
     }
   }

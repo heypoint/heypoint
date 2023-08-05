@@ -2,7 +2,7 @@
   "ignorePatterns": [
     "**/*"
   ],
-  "overrides": [
+  "overrides":      [
     {
       "files": [
         "*.ts",
@@ -14,13 +14,13 @@
         "@nx/enforce-module-boundaries": [
           "error",
           {
-            "allow": [],
-            "depConstraints": [
+            "allow":                         [],
+            "depConstraints":                [
               {
                 "onlyDependOnLibsWithTags": [
                   "*"
                 ],
-                "sourceTag": "*"
+                "sourceTag":                "*"
               }
             ],
             "enforceBuildableLibDependency": true
@@ -32,25 +32,25 @@
       "extends": [
         "plugin:@nx/typescript"
       ],
-      "files": [
+      "files":   [
         "*.ts",
         "*.tsx"
       ],
-      "rules": {}
+      "rules":   {}
     },
     {
       "extends": [
         "plugin:@nx/javascript"
       ],
-      "files": [
+      "files":   [
         "*.js",
         "*.jsx"
       ],
-      "rules": {}
+      "rules":   {}
     }
   ],
-  "plugins": [
+  "plugins":        [
     "@nx"
   ],
-  "root": true
+  "root":           true
 }

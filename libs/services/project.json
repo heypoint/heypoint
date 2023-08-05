@@ -1,38 +1,38 @@
 {
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "name": "services",
-  "prefix": "heypoint",
+  "$schema":     "../../node_modules/nx/schemas/project-schema.json",
+  "name":        "services",
+  "prefix":      "heypoint",
   "projectType": "library",
-  "sourceRoot": "libs/services/src",
-  "tags": [],
-  "targets": {
-    "lint": {
+  "sourceRoot":  "libs/services/src",
+  "tags":        [],
+  "targets":     {
+    "lint":  {
       "executor": "@nx/linter:eslint",
-      "options": {
+      "options":  {
         "lintFilePatterns": [
           "libs/services/**/*.ts",
           "libs/services/**/*.html"
         ]
       },
-      "outputs": [
+      "outputs":  [
         "{options.outputFile}"
       ]
     },
     "build": {
-      "configurations": {
+      "configurations":       {
         "development": {
           "tsConfig": "libs/services/tsconfig.lib.json"
         },
-        "production": {
+        "production":  {
           "tsConfig": "libs/services/tsconfig.lib.prod.json"
         }
       },
       "defaultConfiguration": "production",
-      "executor": "@nx/angular:package",
-      "options": {
+      "executor":             "@nx/angular:package",
+      "options":              {
         "project": "libs/services/ng-package.json"
       },
-      "outputs": [
+      "outputs":              [
         "{workspaceRoot}/dist/{projectRoot}"
       ]
     }

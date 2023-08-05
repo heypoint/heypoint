@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "types": []
+    "types":  []
   },
-  "extends": "./tsconfig.json",
-  "files": [
+  "extends":         "./tsconfig.json",
+  "files":           [
     "src/main.browser.ts",
     "src/polyfills.ts"
   ],
-  "include": [
+  "include":         [
     "src/**/*.d.ts"
-  ],
+  ]
 }

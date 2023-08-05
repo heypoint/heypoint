@@ -1,5 +1,5 @@
 import { APP_ID, Injector, NgModule }                                                            from "@angular/core";
-import { Analytics, ScreenTrackingService, UserTrackingService, getAnalytics, provideAnalytics } from "@angular/fire/analytics";
+import { Analytics, getAnalytics, provideAnalytics, ScreenTrackingService, UserTrackingService } from "@angular/fire/analytics";
 import { FirebaseApp, initializeApp, provideFirebaseApp }                                        from "@angular/fire/app";
 import { AppCheck, initializeAppCheck, provideAppCheck }                                         from "@angular/fire/app-check";
 import { Auth, getAuth, provideAuth }                                                            from "@angular/fire/auth";
@@ -12,20 +12,20 @@ import { RouterModule }                                                         
 import { APP_ENVIRONMENT, GIT_INFO, PACKAGE_VERSION }                                            from "@heypoint/injection-tokens";
 import { AppCheckOptionsService }                                                                from "@heypoint/services";
 import { TransferHttpCacheModule }                                                               from "@nguniversal/common";
-import { environment }                                                                           from "../../../environment";
 import { gitInfo }                                                                               from "../../../.git-info";
 import { packageVersion }                                                                        from "../../../.package-version";
+import { environment }                                                                           from "../../../environment";
 import { RootComponent }                                                                         from "../../components";
 
 
 @NgModule({
-  bootstrap: [
+  bootstrap:    [
     RootComponent,
   ],
   declarations: [
     RootComponent,
   ],
-  imports: [
+  imports:      [
     BrowserAnimationsModule,
     BrowserModule,
     provideAnalytics(
@@ -56,44 +56,45 @@ import { RootComponent }                                                        
           loadComponent: () => import("@heypoint/components").then(
             (m) => m.HomeRouteComponent,
           ),
-          path: "",
-          pathMatch: "full",
-          title: "Heypoint"
+          path:          "",
+          pathMatch:     "full",
+          title:         "Heypoint",
         },
         {
           loadComponent: () => import("@heypoint/components").then(
             (m) => m.OtherwiseRouteComponent,
           ),
-          path: "**",
-          title: "Heypoint | Page not found",
+          path:          "**",
+          title:         "Heypoint | Page not found",
         },
       ],
       {
-        initialNavigation: "enabledBlocking",
+        initialNavigation:         "enabledBlocking",
         scrollPositionRestoration: "enabled",
       },
     ),
     TransferHttpCacheModule,
   ],
-  providers: [
+  providers:    [
     ScreenTrackingService,
     UserTrackingService,
     {
-      provide: APP_ID,
+      provide:  APP_ID,
       useValue: "serverApp",
     },
     {
-      provide: APP_ENVIRONMENT,
+      provide:  APP_ENVIRONMENT,
       useValue: environment,
     },
     {
-      provide: GIT_INFO,
+      provide:  GIT_INFO,
       useValue: gitInfo,
     },
     {
-      provide: PACKAGE_VERSION,
+      provide:  PACKAGE_VERSION,
       useValue: packageVersion,
     },
   ],
 })
-export class AppBrowserModule {}
+export class AppBrowserModule {
+}

@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "declaration": true,
+    "declaration":    true,
     "declarationMap": true,
-    "inlineSources": true,
-    "outDir": "../../dist/out-tsc",
-    "types": []
+    "inlineSources":  true,
+    "outDir":         "../../dist/out-tsc",
+    "types":          []
   },
-  "extends": "./tsconfig.json",
-  "include": [
+  "extends":         "./tsconfig.json",
+  "include":         [
     "src/**/*.ts"
   ]
 }

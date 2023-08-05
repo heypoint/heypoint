@@ -12,7 +12,7 @@ export class GeolocationService {
   public readonly geolocationPosition: Signal<GeolocationPosition | null>;
 
   constructor(
-    @Inject(PLATFORM_ID) private readonly platformId: object,
+    @Inject(PLATFORM_ID) platformId: object,
   ) {
     this
       .geolocationPosition = isPlatformBrowser(platformId) ? toSignal<GeolocationPosition | null>(

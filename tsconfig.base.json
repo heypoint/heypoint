@@ -1,39 +1,43 @@
 {
-  "compileOnSave": false,
+  "compileOnSave":   false,
   "compilerOptions": {
-    "baseUrl": ".",
-    "declaration": false,
-    "emitDecoratorMetadata": true,
+    "baseUrl":                ".",
+    "declaration":            false,
+    "emitDecoratorMetadata":  true,
     "experimentalDecorators": true,
-    "importHelpers": true,
-    "lib": [
+    "importHelpers":          true,
+    "lib":                    [
       "es2020",
       "dom"
     ],
-    "module": "esnext",
-    "moduleResolution": "node",
-    "paths": {
-      "@heypoint/api": [
+    "module":                 "esnext",
+    "moduleResolution":       "node",
+    "paths":                  {
+      "@heypoint/api":              [
         "libs/api/src/index.ts"
       ],
-      "@heypoint/components": [
+      "@heypoint/components":       [
         "libs/components/src/index.ts"
       ],
       "@heypoint/injection-tokens": [
         "libs/injection-tokens/src/index.ts"
       ],
-      "@heypoint/services": [
+      "@heypoint/services":         [
         "libs/services/src/index.ts"
       ],
-      "@heypoint/types": [
+      "@heypoint/types":            [
         "libs/types/src/index.ts"
       ]
     },
-    "rootDir": ".",
-    "skipDefaultLibCheck": true,
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "target": "es2015"
+    "rootDir":                ".",
+    "skipDefaultLibCheck":    true,
+    "skipLibCheck":           true,
+    "sourceMap":              true,
+    "target":                 "es2015"
   },
-  "exclude": ["node_modules", "tmp", "**/README.md"]
+  "exclude":         [
+    "node_modules",
+    "tmp",
+    "**/README.md"
+  ]
 }

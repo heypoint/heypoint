@@ -1,5 +1,5 @@
-import { https, HttpsFunction, Response, runWith } from "firebase-functions";
 import { FunctionResponse }                        from "@heypoint/types";
+import { https, HttpsFunction, Response, runWith } from "firebase-functions";
 
 
 // noinspection JSUnusedGlobalSymbols
@@ -14,5 +14,5 @@ export const endpoint: HttpsFunction = runWith(
       {
         message: "hello world"
       },
-    ).end() && void(0),
+    ).end() && void (0),
   );

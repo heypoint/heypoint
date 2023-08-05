@@ -1,17 +1,18 @@
 import { NgModule }         from "@angular/core";
 import { ServerModule }     from "@angular/platform-server";
-import { AppBrowserModule } from "./app.browser.module";
 import { RootComponent }    from "../../components";
+import { AppBrowserModule } from "./app.browser.module";
 
 
 @NgModule({
-  imports: [
+  imports:   [
     AppBrowserModule,
     ServerModule,
   ],
   bootstrap: [
     RootComponent,
   ],
-  providers: []
+  providers: [],
 })
-export class AppServerModule {}
+export class AppServerModule {
+}

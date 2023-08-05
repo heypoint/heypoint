@@ -1,23 +1,23 @@
 {
-  "name": "@heypoint/api",
-  "version": "0.0.0",
-  "homepage": "https://heypoint.app",
-  "author": {
-    "name": "Gavin Sawyer",
+  "name":         "@heypoint/api",
+  "version":      "0.0.0",
+  "homepage":     "https://heypoint.app",
+  "license":      "Apache-2.0",
+  "private":      true,
+  "author":       {
+    "name":  "Gavin Sawyer",
     "email": "g@vinsawyer.dev",
-    "url": "https://github.com/gavinsawyer"
+    "url":   "https://github.com/gavinsawyer"
   },
-  "license": "Apache-2.0",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/heypoint/heypoint.git",
+  "repository":   {
+    "type":      "git",
+    "url":       "git+https://github.com/heypoint/heypoint.git",
     "directory": "libs/api"
   },
-  "private": true,
-  "engines": {
+  "engines":      {
     "node": "18"
   },
-  "main": "./main.js",
+  "main":         "./main.js",
   "dependencies": {
     "firebase-functions": "^4.4.1"
   }

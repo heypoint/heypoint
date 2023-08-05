@@ -12,7 +12,7 @@ environment
   bootstrap,
 ))(
   () => platformBrowserDynamic().bootstrapModule(AppBrowserModule).then<void, never>(
-    (): void => void(0),
+    (): void => void (0),
   ).catch<void>(
     (err): void => console.error(err),
   ),
