@@ -4,8 +4,8 @@ import { Component, computed, Inject, PLATFORM_ID, signal, Signal }             
 import { toSignal }                                                                       from "@angular/core/rxjs-interop";
 import { GoogleMapsModule }                                                               from "@angular/google-maps";
 import { APP_ENVIRONMENT }                                                                from "@heypoint/injection-tokens";
-import { GeolocationService, ResponsivityService }                                        from "@heypoint/services";
 import { AppEnvironment }                                                                 from "@heypoint/interfaces";
+import { GeolocationService, ResponsivityService }                                        from "@heypoint/services";
 import { map, merge, Observable, Observer, startWith, Subject, switchMap, TeardownLogic } from "rxjs";
 
 
@@ -25,12 +25,12 @@ import { map, merge, Observable, Observer, startWith, Subject, switchMap, Teardo
 })
 export class MapComponent {
 
-  public readonly googleMapsAPILoaded:   Signal<boolean>;
-  public readonly mapOptions:            Signal<google.maps.MapOptions>;
+  public readonly googleMapsAPILoaded: Signal<boolean>;
+  public readonly mapOptions: Signal<google.maps.MapOptions>;
 
   public readonly mapInitializedHandler: (map: google.maps.Map) => void;
 
-  private readonly map:                   Subject<google.maps.Map>;
+  private readonly map: Subject<google.maps.Map>;
   private readonly mapGeolocationEngaged: Signal<boolean>;
 
   constructor(
@@ -85,22 +85,30 @@ export class MapComponent {
         this.map.asObservable().pipe<boolean, boolean>(
           switchMap<google.maps.Map, Observable<boolean>>(
             (map: google.maps.Map): Observable<boolean> => merge<[boolean, boolean, boolean, boolean]>(
-              new Observable<boolean>((mapsEventObserver: Observer<boolean>): TeardownLogic => map.addListener(
-                "dblclick",
-                (): void => mapsEventObserver.next(false),
-              ).remove),
-              new Observable<boolean>((mapsEventObserver: Observer<boolean>): TeardownLogic => map.addListener(
-                "dragstart",
-                (): void => mapsEventObserver.next(false),
-              ).remove),
-              new Observable<boolean>((mapsEventObserver: Observer<boolean>): TeardownLogic => map.addListener(
-                "zoom_changed",
-                (): void => mapsEventObserver.next(false),
-              ).remove),
-              new Observable<boolean>((mapsEventObserver: Observer<boolean>): TeardownLogic => map.addListener(
-                "idle",
-                (): void => mapsEventObserver.next(true),
-              ).remove),
+              new Observable<boolean>(
+                (mapsEventObserver: Observer<boolean>): TeardownLogic => map.addListener(
+                  "dblclick",
+                  (): void => mapsEventObserver.next(false),
+                ).remove,
+              ),
+              new Observable<boolean>(
+                (mapsEventObserver: Observer<boolean>): TeardownLogic => map.addListener(
+                  "dragstart",
+                  (): void => mapsEventObserver.next(false),
+                ).remove,
+              ),
+              new Observable<boolean>(
+                (mapsEventObserver: Observer<boolean>): TeardownLogic => map.addListener(
+                  "zoom_changed",
+                  (): void => mapsEventObserver.next(false),
+                ).remove,
+              ),
+              new Observable<boolean>(
+                (mapsEventObserver: Observer<boolean>): TeardownLogic => map.addListener(
+                  "idle",
+                  (): void => mapsEventObserver.next(true),
+                ).remove,
+              ),
             ),
           ),
           startWith<boolean>(true),

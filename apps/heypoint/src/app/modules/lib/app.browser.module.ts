@@ -6,6 +6,7 @@ import { Auth, getAuth, provideAuth }                                           
 import { Firestore, getFirestore, provideFirestore }                                             from "@angular/fire/firestore";
 import { Functions, getFunctions, provideFunctions }                                             from "@angular/fire/functions";
 import { ReactiveFormsModule }                                                                   from "@angular/forms";
+import { MatSidenavModule }                                                                      from "@angular/material/sidenav";
 import { BrowserModule }                                                                         from "@angular/platform-browser";
 import { BrowserAnimationsModule }                                                               from "@angular/platform-browser/animations";
 import { RouterModule }                                                                          from "@angular/router";
@@ -25,9 +26,10 @@ import { RootComponent }                                                        
   declarations: [
     RootComponent,
   ],
-  imports:      [
+  imports: [
     BrowserAnimationsModule,
     BrowserModule,
+    MatSidenavModule,
     provideAnalytics(
       (): Analytics => getAnalytics(),
     ),

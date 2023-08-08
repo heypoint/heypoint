@@ -1,13 +1,12 @@
 \:host
-  display: flex
-  flex-direction: column
-  flex-grow: 1
-  min-height: calc(100vh)
 
-  main
+  &,
+  mat-sidenav-container,
+  mat-sidenav-content
     display: flex
     flex-direction: column
     flex-grow: 1
+    min-height: calc(100vh)
 
-    router-outlet
-      display: none
+  mat-sidenav-container > mat-sidenav-content > router-outlet
+    display: none

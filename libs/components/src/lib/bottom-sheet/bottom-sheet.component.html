@@ -1,6 +1,8 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <button mat-raised-button="">
+    <button
+      mat-raised-button=""
+      (click)="sidenavService.matStartSidenav()?.open();">
       <mat-icon>
         person
       </mat-icon>
@@ -15,10 +17,50 @@
         </span>
       </mat-card-content>
     </mat-card>
-    <button mat-raised-button="">
+    <button
+      mat-raised-button=""
+      (click)="sidenavService.matEndSidenav()?.open();">
       <mat-icon>
         more_horiz
       </mat-icon>
     </button>
   </mat-toolbar-row>
 </mat-toolbar>
+<div>
+  <div>
+    <button
+      color="primary"
+      mat-fab="">
+      <mat-icon>school</mat-icon>
+    </button>
+    <div>
+      <p class="mat-caption">
+        Academic buildings
+      </p>
+    </div>
+  </div>
+  <div>
+    <button
+      color="primary"
+      mat-fab="">
+      <mat-icon>house</mat-icon>
+    </button>
+    <div>
+      <p class="mat-caption">
+        Residence halls
+      </p>
+    </div>
+  </div>
+  <div>
+    <button
+      color="primary"
+      mat-fab="">
+      <mat-icon>bookmark</mat-icon>
+    </button>
+    <div>
+      <p class="mat-caption">
+        Saved places
+      </p>
+    </div>
+  </div>
+</div>

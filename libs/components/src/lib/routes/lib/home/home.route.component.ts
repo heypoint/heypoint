@@ -1,6 +1,10 @@
 import { CommonModule }                                            from "@angular/common";
 import { Component }                                               from "@angular/core";
+import { takeUntilDestroyed }                                      from "@angular/core/rxjs-interop";
 import { MatBottomSheet, MatBottomSheetModule, MatBottomSheetRef } from "@angular/material/bottom-sheet";
+import { MatSidenav }                                              from "@angular/material/sidenav";
+import { SidenavService }                                          from "@heypoint/services";
+import { map, merge, Observable, startWith, switchMap }            from "rxjs";
 import { BottomSheetComponent }                                    from "../../../bottom-sheet/bottom-sheet.component";
 import { MapComponent }                                            from "../../../map/map.component";
 
@@ -20,18 +24,66 @@ import { MapComponent }                                            from "../../.
 })
 export class HomeRouteComponent {
 
-  private readonly bottomSheetRef: MatBottomSheetRef;
+  private matBottomSheetRef?: MatBottomSheetRef;
 
   constructor(
     matBottomSheet: MatBottomSheet,
+    sidenavService: SidenavService,
   ) {
-    this
-      .bottomSheetRef = matBottomSheet
-      .open(
-        BottomSheetComponent,
-        {
-          disableClose: true,
-          hasBackdrop:  false,
+    merge<[boolean, boolean]>(
+      sidenavService.matEndSidenavSubject.asObservable().pipe<boolean>(
+        switchMap<MatSidenav, Observable<boolean>>(
+          (matSidenav: MatSidenav): Observable<boolean> => merge<[boolean, boolean]>(
+            matSidenav.closedStart.pipe<boolean>(
+              map<void, boolean>(
+                (): boolean => true,
+              ),
+            ),
+            matSidenav.openedStart.pipe<boolean>(
+              map<void, boolean>(
+                (): boolean => false,
+              ),
+            ),
+          ),
+        ),
+      ),
+      sidenavService.matStartSidenavSubject.asObservable().pipe<boolean>(
+        switchMap<MatSidenav, Observable<boolean>>(
+          (matSidenav: MatSidenav): Observable<boolean> => merge<[boolean, boolean]>(
+            matSidenav.closedStart.pipe<boolean>(
+              map<void, boolean>(
+                (): boolean => true,
+              ),
+            ),
+            matSidenav.openedStart.pipe<boolean>(
+              map<void, boolean>(
+                (): boolean => false,
+              ),
+            ),
+          ),
+        ),
+      ),
+    )
+      .pipe<boolean, boolean>(
+        startWith<boolean>(true),
+        takeUntilDestroyed<boolean>(),
+      )
+      .subscribe(
+        (opened: boolean): void => {
+          this
+            .matBottomSheetRef
+            ?.dismiss();
+
+          opened && ((): void => {
+            this
+              .matBottomSheetRef = matBottomSheet
+              .open(
+                BottomSheetComponent,
+                {
+                  hasBackdrop: false,
+                },
+              );
+          })();
         },
       );
   }
