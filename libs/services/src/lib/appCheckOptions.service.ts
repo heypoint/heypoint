@@ -2,7 +2,7 @@ import { isPlatformBrowser }                                                   f
 import { Inject, Injectable, PLATFORM_ID }                                     from "@angular/core";
 import { AppCheckOptions, AppCheckToken, CustomProvider, ReCaptchaV3Provider } from "@angular/fire/app-check";
 import { APP_ENVIRONMENT }                                                     from "@heypoint/injection-tokens";
-import { AppEnvironment }                                                      from "@heypoint/types";
+import { AppEnvironment }                                                      from "@heypoint/interfaces";
 
 
 @Injectable({

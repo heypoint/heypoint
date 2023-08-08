@@ -22,11 +22,11 @@
       "@heypoint/injection-tokens": [
         "libs/injection-tokens/src/index.ts"
       ],
+      "@heypoint/interfaces":       [
+        "libs/interfaces/src/index.ts"
+      ],
       "@heypoint/services":         [
         "libs/services/src/index.ts"
-      ],
-      "@heypoint/types":            [
-        "libs/types/src/index.ts"
       ]
     },
     "rootDir":                ".",

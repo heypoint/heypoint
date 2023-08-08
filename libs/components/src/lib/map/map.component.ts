@@ -5,7 +5,7 @@ import { toSignal }                                                             
 import { GoogleMapsModule }                                                               from "@angular/google-maps";
 import { APP_ENVIRONMENT }                                                                from "@heypoint/injection-tokens";
 import { GeolocationService, ResponsivityService }                                        from "@heypoint/services";
-import { AppEnvironment }                                                                 from "@heypoint/types";
+import { AppEnvironment }                                                                 from "@heypoint/interfaces";
 import { map, merge, Observable, Observer, startWith, Subject, switchMap, TeardownLogic } from "rxjs";
 
 
