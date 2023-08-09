@@ -13,61 +13,70 @@ export function app(): express.Express {
     process.cwd(),
     "dist/apps/heypoint/browser",
   );
-  const indexHtml = existsSync(join(
-    distFolder,
-    "index.original.html",
-  )) ? "index.original.html" : "index";
+  const indexHtml = existsSync(
+    join(
+      distFolder,
+      "index.original.html",
+    ),
+  ) ? "index.original.html" : "index";
 
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/main/modules/express-engine)
-  server.engine(
-    "html",
-    ngExpressEngine({
-      bootstrap: AppServerModule,
-    }),
-  );
+  server
+    .engine(
+      "html",
+      ngExpressEngine(
+        {
+          bootstrap: AppServerModule,
+        },
+      ),
+    );
 
-  server.set(
-    "view engine",
-    "html",
-  );
-  server.set(
-    "views",
-    distFolder,
-  );
+  server
+    .set(
+      "view engine",
+      "html",
+    );
+  server
+    .set(
+      "views",
+      distFolder,
+    );
 
   // Example Express Rest API endpoints
   // server.get.js('/api/**', (req, res) => { });
   // Serve static files from /browser
-  server.get(
-    "*.*",
-    express.static(
-      distFolder,
-      {
-        maxAge: "1y",
-      },
-    ),
-  );
+  server
+    .get(
+      "*.*",
+      express.static(
+        distFolder,
+        {
+          maxAge: "1y",
+        },
+      ),
+    );
 
   // All regular routes use the Universal engine
-  server.get(
-    "*",
-    (req, res) => {
-      res.render(
-        indexHtml,
-        {
-          req,
-          res,
-          providers: [
-            {
-              provide:  APP_BASE_HREF,
-              useValue: req.baseUrl,
-            },
-          ],
-        },
-        (error: Error, html?: string) => res.send(html).end(),
-      );
-    },
-  );
+  server
+    .get(
+      "*",
+      (req, res) => {
+        res.render(
+          indexHtml,
+          {
+            req,
+            res,
+            providers: [
+              {
+                provide:  APP_BASE_HREF,
+                useValue: req.baseUrl,
+              },
+            ],
+          },
+          (error: Error, html?: string) => res.send(html).end(),
+        );
+      },
+    );
 
   return server;
 }
@@ -77,12 +86,13 @@ function run(): void {
 
   // Start up the Node server
   const server = app();
-  server.listen(
-    port,
-    () => {
-      console.log(`Node Express server listening on http://localhost:${port}`);
-    },
-  );
+  server
+    .listen(
+      port,
+      () => {
+        console.log(`Node Express server listening on http://localhost:${port}`);
+      },
+    );
 }
 
 // Webpack will replace 'require' with '__webpack_require__'

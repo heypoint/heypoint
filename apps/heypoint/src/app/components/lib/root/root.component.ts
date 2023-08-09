@@ -14,8 +14,8 @@ import { GitInfo }                                     from "git-describe";
 })
 export class RootComponent implements AfterViewInit {
 
-  @ViewChild("matEndSidenav")   private readonly matEndSidenav!:   MatSidenav;
-  @ViewChild("matStartSidenav") private readonly matStartSidenav!: MatSidenav;
+  @ViewChild("matSidenavEnd")   private readonly matSidenavEnd!:   MatSidenav;
+  @ViewChild("matSidenavStart") private readonly matSidenavStart!: MatSidenav;
 
   constructor(
     @Inject(GIT_INFO)        public readonly gitInfo:        Partial<GitInfo>,
@@ -28,12 +28,12 @@ export class RootComponent implements AfterViewInit {
   ngAfterViewInit() {
     this
       .sidenavService
-      .matEndSidenavSubject
-      .next(this.matEndSidenav);
-    this
-      .sidenavService
-      .matStartSidenavSubject
-      .next(this.matStartSidenav);
+      .afterViewInitHandler(
+        {
+          matSidenavEnd:   this.matSidenavEnd,
+          matSidenavStart: this.matSidenavStart,
+        },
+      );
   }
 
 }

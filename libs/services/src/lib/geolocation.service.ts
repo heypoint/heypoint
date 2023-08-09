@@ -9,13 +9,13 @@ import { Observable, Observer, startWith, TeardownLogic }  from "rxjs";
 })
 export class GeolocationService {
 
-  public readonly geolocationPosition: Signal<GeolocationPosition | null>;
+  public readonly geolocationPosition$: Signal<GeolocationPosition | null>;
 
   constructor(
     @Inject(PLATFORM_ID) platformId: object,
   ) {
     this
-      .geolocationPosition = isPlatformBrowser(platformId) ? toSignal<GeolocationPosition | null>(
+      .geolocationPosition$ = isPlatformBrowser(platformId) ? toSignal<GeolocationPosition | null>(
         new Observable<GeolocationPosition | null>(
           (geolocationObserver: Observer<GeolocationPosition | null>): TeardownLogic => ((watchId: number): () => void => (): void => navigator.geolocation.clearWatch(watchId))(
             navigator.geolocation.watchPosition(

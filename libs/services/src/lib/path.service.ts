@@ -10,14 +10,14 @@ import { filter, map, startWith }                                               
 })
 export class PathService {
 
-  public readonly path: Signal<string>;
+  public readonly path$: Signal<string>;
 
   constructor(
     location: Location,
     router:   Router,
   ) {
     this
-      .path = toSignal<string>(
+      .path$ = toSignal<string>(
         router.events.pipe<NavigationEnd, string, string>(
           filter<RouterEvent | NavigationStart | NavigationEnd | NavigationCancel | NavigationError | RoutesRecognized | GuardsCheckStart | GuardsCheckEnd | RouteConfigLoadStart | RouteConfigLoadEnd | ChildActivationStart | ChildActivationEnd | ActivationStart | ActivationEnd | Scroll | ResolveStart | ResolveEnd, NavigationEnd>(
             (routerEvent: RouterEvent | NavigationStart | NavigationEnd | NavigationCancel | NavigationError | RoutesRecognized | GuardsCheckStart | GuardsCheckEnd | RouteConfigLoadStart | RouteConfigLoadEnd | ChildActivationStart | ChildActivationEnd | ActivationStart | ActivationEnd | Scroll | ResolveStart | ResolveEnd): routerEvent is NavigationEnd => routerEvent instanceof NavigationEnd,

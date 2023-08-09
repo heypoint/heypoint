@@ -2,7 +2,7 @@
   <mat-toolbar-row>
     <button
       mat-raised-button=""
-      (click)="sidenavService.matStartSidenav()?.open();">
+      (click)="sidenavService.matSidenavStart$()?.open();">
       <mat-icon>
         person
       </mat-icon>
@@ -19,7 +19,7 @@
     </mat-card>
     <button
       mat-raised-button=""
-      (click)="sidenavService.matEndSidenav()?.open();">
+      (click)="sidenavService.matSidenavEnd$()?.open();">
       <mat-icon>
         more_horiz
       </mat-icon>

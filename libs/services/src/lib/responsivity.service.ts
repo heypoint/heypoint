@@ -12,8 +12,8 @@ type ColorScheme = "light" | "dark";
 })
 export class ResponsivityService {
 
-  public readonly colorScheme:    Signal<ColorScheme>;
-  public readonly scrollPosition: Signal<number>;
+  public readonly colorScheme$:    Signal<ColorScheme>;
+  public readonly scrollPosition$: Signal<number>;
 
   constructor(
     @Inject(DOCUMENT)    document:   Document,
@@ -22,7 +22,7 @@ export class ResponsivityService {
     private readonly breakpointObserver: BreakpointObserver,
   ) {
     this
-      .colorScheme = isPlatformBrowser(platformId) ? toSignal<ColorScheme>(
+      .colorScheme$ = isPlatformBrowser(platformId) ? toSignal<ColorScheme>(
         breakpointObserver.observe("(prefers-color-scheme: light)").pipe<ColorScheme>(
           map<BreakpointState, ColorScheme>((breakpointState: BreakpointState): ColorScheme => breakpointState.matches ? "light" : "dark"),
         ),
@@ -31,7 +31,7 @@ export class ResponsivityService {
         },
       ) : signal<ColorScheme>("light");
     this
-      .scrollPosition = isPlatformBrowser(platformId) ? toSignal<number>(
+      .scrollPosition$ = isPlatformBrowser(platformId) ? toSignal<number>(
         fromEvent<Event>(
           document,
           "scroll",

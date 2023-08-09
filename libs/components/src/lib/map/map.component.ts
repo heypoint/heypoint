@@ -25,12 +25,12 @@ import { map, merge, Observable, Observer, startWith, Subject, switchMap, Teardo
 })
 export class MapComponent {
 
-  public readonly googleMapsAPILoaded: Signal<boolean>;
-  public readonly mapOptions: Signal<google.maps.MapOptions>;
+  public readonly googleMapsAPILoaded$: Signal<boolean>;
+  public readonly mapOptions$:          Signal<google.maps.MapOptions>;
 
   public readonly mapInitializedHandler: (map: google.maps.Map) => void;
 
-  private readonly map: Subject<google.maps.Map>;
+  private readonly mapSubject: Subject<google.maps.Map>;
   private readonly mapGeolocationEngaged: Signal<boolean>;
 
   constructor(
@@ -42,7 +42,7 @@ export class MapComponent {
     responsivityService: ResponsivityService,
   ) {
     this
-      .googleMapsAPILoaded = isPlatformBrowser(platformId) ? toSignal<boolean>(
+      .googleMapsAPILoaded$ = isPlatformBrowser(platformId) ? toSignal<boolean>(
         httpClient.jsonp(
           "https://maps.googleapis.com/maps/api/js?key=" + appEnvironment.firebase.apiKey,
           "callback",
@@ -57,18 +57,16 @@ export class MapComponent {
         },
       ) : signal<boolean>(false);
     this
-      .map = new Subject<google.maps.Map>();
-    this
-      .mapOptions = computed<google.maps.MapOptions>(
+      .mapOptions$ = computed<google.maps.MapOptions>(
         (): google.maps.MapOptions => ({
           center:           ((geolocationPosition: GeolocationPosition | null): google.maps.LatLngLiteral | null => geolocationPosition && ({
             lat: geolocationPosition.coords.latitude,
             lng: geolocationPosition.coords.longitude,
-          }))(geolocationService.geolocationPosition()),
+          }))(geolocationService.geolocationPosition$()),
           clickableIcons:   false,
           disableDefaultUI: true,
           gestureHandling:  "greedy",
-          mapId:            responsivityService.colorScheme() == "light" ? "4658b3e01cedf4cb" : "28b46c4c6bed5a4",
+          mapId:            responsivityService.colorScheme$() == "light" ? "4658b3e01cedf4cb" : "28b46c4c6bed5a4",
           maxZoom:          20,
           minZoom:          10,
         }),
@@ -78,11 +76,13 @@ export class MapComponent {
       );
     this
       .mapInitializedHandler = (map: google.maps.Map): void => this
-      .map
+      .mapSubject
       .next(map);
     this
+      .mapSubject = new Subject<google.maps.Map>();
+    this
       .mapGeolocationEngaged = isPlatformBrowser(platformId) ? toSignal<boolean>(
-        this.map.asObservable().pipe<boolean, boolean>(
+        this.mapSubject.asObservable().pipe<boolean, boolean>(
           switchMap<google.maps.Map, Observable<boolean>>(
             (map: google.maps.Map): Observable<boolean> => merge<[boolean, boolean, boolean, boolean]>(
               new Observable<boolean>(

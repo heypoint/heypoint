@@ -9,17 +9,20 @@ import { ReplaySubject, startWith } from "rxjs";
 })
 export class SidenavService {
 
-  public readonly matEndSidenav:          Signal<MatSidenav | undefined>;
-  public readonly matEndSidenavSubject:   ReplaySubject<MatSidenav>;
-  public readonly matStartSidenav:        Signal<MatSidenav | undefined>;
-  public readonly matStartSidenavSubject: ReplaySubject<MatSidenav>;
+  public readonly matSidenavEnd$:   Signal<MatSidenav | undefined>;
+  public readonly matSidenavStart$: Signal<MatSidenav | undefined>;
+
+  public readonly afterViewInitHandler: (options: { "matSidenavEnd": MatSidenav, "matSidenavStart": MatSidenav }) => void;
+
+  private readonly matSidenavEndSubject:   ReplaySubject<MatSidenav>;
+  private readonly matSidenavStartSubject: ReplaySubject<MatSidenav>;
 
   constructor() {
     this
-      .matEndSidenavSubject = new ReplaySubject<MatSidenav>(1);
+      .matSidenavEndSubject = new ReplaySubject<MatSidenav>(1);
     this
-      .matEndSidenav = toSignal<MatSidenav | undefined>(
-        this.matEndSidenavSubject.asObservable().pipe<MatSidenav | undefined>(
+      .matSidenavEnd$ = toSignal<MatSidenav | undefined>(
+        this.matSidenavEndSubject.asObservable().pipe<MatSidenav | undefined>(
           startWith<MatSidenav | undefined>(undefined),
         ),
         {
@@ -27,10 +30,20 @@ export class SidenavService {
         },
       );
     this
-      .matStartSidenavSubject = new ReplaySubject<MatSidenav>(1);
+      .afterViewInitHandler = (options: { "matSidenavEnd": MatSidenav, "matSidenavStart": MatSidenav }): void => {
+        this
+          .matSidenavEndSubject
+          .next(options.matSidenavEnd);
+
+        this
+          .matSidenavStartSubject
+          .next(options.matSidenavStart);
+      };
     this
-      .matStartSidenav = toSignal<MatSidenav | undefined>(
-        this.matStartSidenavSubject.asObservable().pipe<MatSidenav | undefined>(
+      .matSidenavStartSubject = new ReplaySubject<MatSidenav>(1);
+    this
+      .matSidenavStart$ = toSignal<MatSidenav | undefined>(
+        this.matSidenavStartSubject.asObservable().pipe<MatSidenav | undefined>(
           startWith<MatSidenav | undefined>(undefined),
         ),
         {
