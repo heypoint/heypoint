@@ -31,7 +31,7 @@ export class MapComponent {
     @Inject(APP_ENVIRONMENT) appEnvironment: AppEnvironment,
     @Inject(PLATFORM_ID)     platformId:     object,
 
-    httpClient:          HttpClient,
+    httpClient: HttpClient,
 
     public readonly mapService: MapService,
   ) {
@@ -44,11 +44,11 @@ export class MapComponent {
           map<unknown, true>(
             (): true => true,
           ),
-          startWith<true, [false]>(false),
+          startWith<true, [ false ]>(false),
           distinctUntilChanged<boolean>(),
         ),
         {
-          requireSync:  true,
+          requireSync: true,
         },
       ) : signal<boolean>(false);
   }

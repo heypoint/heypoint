@@ -12,14 +12,14 @@ type ColorScheme = "light" | "dark";
 })
 export class ResponsivityService {
 
-  public readonly colorScheme$:    Signal<ColorScheme>;
+  public readonly colorScheme$: Signal<ColorScheme>;
   public readonly scrollPosition$: Signal<number>;
 
   constructor(
     @Inject(DOCUMENT)    document:   Document,
     @Inject(PLATFORM_ID) platformId: object,
 
-    private readonly breakpointObserver: BreakpointObserver,
+    breakpointObserver: BreakpointObserver,
   ) {
     this
       .colorScheme$ = isPlatformBrowser(platformId) ? toSignal<ColorScheme>(

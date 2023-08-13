@@ -12,7 +12,7 @@ import { distinctUntilChanged, filter, map, merge, Observable, Observer, ReplayS
 
 
 @Component({
-  imports: [
+  imports:     [
     CommonModule,
     MatButtonModule,
     MatCardModule,
@@ -54,7 +54,7 @@ export class BottomSheetComponent implements AfterViewInit {
       .expanded$ = isPlatformBrowser(platformId) ? toSignal<boolean>(
         this.buttonsSubject.asObservable().pipe<boolean, boolean, boolean>(
           switchMap<{ academicBuildingsButton: MatFabButton, residenceHallsButton: MatFabButton, savedPlacesButton: MatFabButton, postButton: MatButton, exploreButton: MatButton }, Observable<boolean>>(
-            (buttons: { academicBuildingsButton: MatFabButton, residenceHallsButton: MatFabButton, savedPlacesButton: MatFabButton, postButton: MatButton, exploreButton: MatButton }): Observable<boolean> => merge<[true, true, true, true, void, false]>(
+            (buttons: { academicBuildingsButton: MatFabButton, residenceHallsButton: MatFabButton, savedPlacesButton: MatFabButton, postButton: MatButton, exploreButton: MatButton }): Observable<boolean> => merge<[ true, true, true, true, void, false ]>(
               new Observable<true>(
                 (buttonEventObserver: Observer<true>): TeardownLogic => renderer2.listen(
                   buttons.academicBuildingsButton._elementRef.nativeElement,
@@ -105,7 +105,7 @@ export class BottomSheetComponent implements AfterViewInit {
               ),
             ),
           ),
-          startWith<boolean, [false]>(false),
+          startWith<boolean, [ false ]>(false),
           distinctUntilChanged<boolean>(),
         ),
         {

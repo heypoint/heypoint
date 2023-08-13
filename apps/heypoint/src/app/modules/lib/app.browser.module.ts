@@ -55,7 +55,7 @@ import { RootComponent }                                                        
     RouterModule.forRoot(
       [
         {
-          loadComponent: () => import("@heypoint/components").then(
+          loadComponent: () => import("../../components/lib/routes/lib/home/home.route.component").then(
             (m) => m.HomeRouteComponent,
           ),
           path:          "",
@@ -63,7 +63,7 @@ import { RootComponent }                                                        
           title:         "Heypoint",
         },
         {
-          loadComponent: () => import("@heypoint/components").then(
+          loadComponent: () => import("../../components/lib/routes/lib/otherwise/otherwise.route.component").then(
             (m) => m.OtherwiseRouteComponent,
           ),
           path:          "**",

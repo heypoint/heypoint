@@ -1,5 +1,5 @@
-import { Injectable, Signal }       from "@angular/core";
-import { toSignal }                 from "@angular/core/rxjs-interop";
+import { Injectable, Signal }                             from "@angular/core";
+import { toSignal }                                       from "@angular/core/rxjs-interop";
 import { MatSidenav }                                     from "@angular/material/sidenav";
 import { distinctUntilChanged, ReplaySubject, startWith } from "rxjs";
 
@@ -45,7 +45,7 @@ export class SidenavService {
     this
       .matSidenavStart$ = toSignal<MatSidenav | undefined>(
         this.matSidenavStartSubject.asObservable().pipe<MatSidenav | undefined, MatSidenav | undefined>(
-          startWith<MatSidenav | undefined, [undefined]>(undefined),
+          startWith<MatSidenav | undefined, [ undefined ]>(undefined),
           distinctUntilChanged<MatSidenav | undefined>(),
         ),
         {

@@ -3,12 +3,12 @@ import { computed, Inject, Injectable, NgZone, PLATFORM_ID, signal, Signal }    
 import { toSignal }                                                                                                         from "@angular/core/rxjs-interop";
 import { APP_ENVIRONMENT }                                                                                                  from "@heypoint/injection-tokens";
 import { AppEnvironment }                                                                                                   from "@heypoint/interfaces";
-import { GeolocationService, ResponsivityService }                                                                          from "../";
 import { delay, distinctUntilChanged, merge, Observable, Observer, of, ReplaySubject, startWith, switchMap, TeardownLogic } from "rxjs";
+import { GeolocationService, ResponsivityService }                                                                          from "../";
 
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class MapService {
 
@@ -58,7 +58,7 @@ export class MapService {
       .asObservable()
       .pipe<boolean, boolean, boolean>(
         switchMap<google.maps.Map, Observable<boolean>>(
-          (map: google.maps.Map): Observable<boolean> => merge<[true, true, true, true, true, true, false, true, true]>(
+          (map: google.maps.Map): Observable<boolean> => merge<[ true, true, true, true, true, true, false, true, true ]>(
             new Observable<true>(
               (mapsEventObserver: Observer<true>): TeardownLogic => map.addListener(
                 "bounds_changed",
@@ -139,7 +139,7 @@ export class MapService {
             ),
           ),
         ),
-        startWith<boolean, [false]>(false),
+        startWith<boolean, [ false ]>(false),
         distinctUntilChanged<boolean>(),
       );
     this
@@ -147,7 +147,7 @@ export class MapService {
         this.mapHasInteractionObservable,
         {
           requireSync: true,
-        }
+        },
       ) : signal<boolean>(false);
   }
 

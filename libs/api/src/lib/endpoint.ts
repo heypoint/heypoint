@@ -11,7 +11,7 @@ export const endpoint: HttpsFunction = runWith(
   .onRequest(
     (request: https.Request, response: Response<unknown>): void => response.send(
       {
-        message: "hello world"
+        message: "hello world",
       },
     ).end() && void (0),
   );

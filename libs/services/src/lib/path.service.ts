@@ -25,7 +25,7 @@ export class PathService {
           map<NavigationEnd, string>(
             (navigationEnd: NavigationEnd): string => navigationEnd.url.split("?")[0],
           ),
-          startWith<string, [string]>(location.path()),
+          startWith<string, [ string ]>(location.path()),
           distinctUntilChanged<string>(),
         ),
         {

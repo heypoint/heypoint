@@ -27,7 +27,7 @@ export class GeolocationService {
             ),
           ),
         ).pipe<GeolocationPosition | null, GeolocationPosition | null>(
-          startWith<GeolocationPosition | null, [null]>(null),
+          startWith<GeolocationPosition | null, [ null ]>(null),
           distinctUntilChanged<GeolocationPosition | null>(),
         ),
         {
