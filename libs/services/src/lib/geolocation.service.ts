@@ -1,7 +1,7 @@
-import { isPlatformBrowser }                               from "@angular/common";
-import { Inject, Injectable, PLATFORM_ID, Signal, signal } from "@angular/core";
-import { toSignal }                                        from "@angular/core/rxjs-interop";
-import { Observable, Observer, startWith, TeardownLogic }  from "rxjs";
+import { isPlatformBrowser }                                                    from "@angular/common";
+import { Inject, Injectable, PLATFORM_ID, Signal, signal }                      from "@angular/core";
+import { toSignal }                                                             from "@angular/core/rxjs-interop";
+import { distinctUntilChanged, Observable, Observer, startWith, TeardownLogic } from "rxjs";
 
 
 @Injectable({
@@ -26,8 +26,9 @@ export class GeolocationService {
               },
             ),
           ),
-        ).pipe<GeolocationPosition | null>(
-          startWith<GeolocationPosition | null>(null),
+        ).pipe<GeolocationPosition | null, GeolocationPosition | null>(
+          startWith<GeolocationPosition | null, [null]>(null),
+          distinctUntilChanged<GeolocationPosition | null>(),
         ),
         {
           requireSync: true,

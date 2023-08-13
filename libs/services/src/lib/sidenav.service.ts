@@ -1,7 +1,7 @@
 import { Injectable, Signal }       from "@angular/core";
 import { toSignal }                 from "@angular/core/rxjs-interop";
-import { MatSidenav }               from "@angular/material/sidenav";
-import { ReplaySubject, startWith } from "rxjs";
+import { MatSidenav }                                     from "@angular/material/sidenav";
+import { distinctUntilChanged, ReplaySubject, startWith } from "rxjs";
 
 
 @Injectable({
@@ -12,7 +12,7 @@ export class SidenavService {
   public readonly matSidenavEnd$:   Signal<MatSidenav | undefined>;
   public readonly matSidenavStart$: Signal<MatSidenav | undefined>;
 
-  public readonly afterViewInitHandler: (options: { "matSidenavEnd": MatSidenav, "matSidenavStart": MatSidenav }) => void;
+  public readonly viewInitializedHandler: (options: { "matSidenavEnd": MatSidenav, "matSidenavStart": MatSidenav }) => void;
 
   private readonly matSidenavEndSubject:   ReplaySubject<MatSidenav>;
   private readonly matSidenavStartSubject: ReplaySubject<MatSidenav>;
@@ -22,15 +22,16 @@ export class SidenavService {
       .matSidenavEndSubject = new ReplaySubject<MatSidenav>(1);
     this
       .matSidenavEnd$ = toSignal<MatSidenav | undefined>(
-        this.matSidenavEndSubject.asObservable().pipe<MatSidenav | undefined>(
+        this.matSidenavEndSubject.asObservable().pipe<MatSidenav | undefined, MatSidenav | undefined>(
           startWith<MatSidenav | undefined>(undefined),
+          distinctUntilChanged<MatSidenav | undefined>(),
         ),
         {
           requireSync: true,
         },
       );
     this
-      .afterViewInitHandler = (options: { "matSidenavEnd": MatSidenav, "matSidenavStart": MatSidenav }): void => {
+      .viewInitializedHandler = (options: { "matSidenavEnd": MatSidenav, "matSidenavStart": MatSidenav }): void => {
         this
           .matSidenavEndSubject
           .next(options.matSidenavEnd);
@@ -43,8 +44,9 @@ export class SidenavService {
       .matSidenavStartSubject = new ReplaySubject<MatSidenav>(1);
     this
       .matSidenavStart$ = toSignal<MatSidenav | undefined>(
-        this.matSidenavStartSubject.asObservable().pipe<MatSidenav | undefined>(
-          startWith<MatSidenav | undefined>(undefined),
+        this.matSidenavStartSubject.asObservable().pipe<MatSidenav | undefined, MatSidenav | undefined>(
+          startWith<MatSidenav | undefined, [undefined]>(undefined),
+          distinctUntilChanged<MatSidenav | undefined>(),
         ),
         {
           requireSync: true,

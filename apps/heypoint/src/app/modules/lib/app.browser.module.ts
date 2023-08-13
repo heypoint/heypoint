@@ -7,7 +7,7 @@ import { Firestore, getFirestore, provideFirestore }                            
 import { Functions, getFunctions, provideFunctions }                                             from "@angular/fire/functions";
 import { ReactiveFormsModule }                                                                   from "@angular/forms";
 import { MatSidenavModule }                                                                      from "@angular/material/sidenav";
-import { BrowserModule }                                                                         from "@angular/platform-browser";
+import { BrowserModule, provideClientHydration }                                                 from "@angular/platform-browser";
 import { BrowserAnimationsModule }                                                               from "@angular/platform-browser/animations";
 import { RouterModule }                                                                          from "@angular/router";
 import { APP_ENVIRONMENT, GIT_INFO, PACKAGE_VERSION }                                            from "@heypoint/injection-tokens";
@@ -78,6 +78,7 @@ import { RootComponent }                                                        
     TransferHttpCacheModule,
   ],
   providers:    [
+    provideClientHydration(),
     ScreenTrackingService,
     UserTrackingService,
     {

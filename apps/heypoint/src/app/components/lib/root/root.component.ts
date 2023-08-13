@@ -28,7 +28,7 @@ export class RootComponent implements AfterViewInit {
   ngAfterViewInit() {
     this
       .sidenavService
-      .afterViewInitHandler(
+      .viewInitializedHandler(
         {
           matSidenavEnd:   this.matSidenavEnd,
           matSidenavStart: this.matSidenavStart,

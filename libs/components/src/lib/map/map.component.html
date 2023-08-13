@@ -1,6 +1,6 @@
 <google-map
   height="100%"
   width="100%"
-  [options]="mapOptions$()"
-  (mapInitialized)="mapInitializedHandler($event);"
+  [options]="mapService.mapOptions$()"
+  (mapInitialized)="mapService.mapInitializedHandler($event);"
   *ngIf="googleMapsAPILoaded$()" />

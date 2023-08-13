@@ -1,12 +1,12 @@
-import { CommonModule }                                            from "@angular/common";
-import { Component }                                               from "@angular/core";
-import { takeUntilDestroyed, toObservable }                        from "@angular/core/rxjs-interop";
-import { MatBottomSheet, MatBottomSheetModule, MatBottomSheetRef } from "@angular/material/bottom-sheet";
-import { MatSidenav }                                              from "@angular/material/sidenav";
-import { SidenavService }                                       from "@heypoint/services";
-import { filter, map, merge, Observable, startWith, switchMap } from "rxjs";
-import { BottomSheetComponent }                                 from "../../../bottom-sheet/bottom-sheet.component";
-import { MapComponent }                                            from "../../../map/map.component";
+import { CommonModule }                                                               from "@angular/common";
+import { Component }                                                                  from "@angular/core";
+import { takeUntilDestroyed, toObservable }                                           from "@angular/core/rxjs-interop";
+import { MatBottomSheet, MatBottomSheetModule, MatBottomSheetRef }                    from "@angular/material/bottom-sheet";
+import { MatSidenav }                                                                 from "@angular/material/sidenav";
+import { SidenavService }                                                             from "@heypoint/services";
+import { distinctUntilChanged, filter, map, merge, Observable, startWith, switchMap } from "rxjs";
+import { BottomSheetComponent }                                                       from "../../../bottom-sheet/bottom-sheet.component";
+import { MapComponent }                                                               from "../../../map/map.component";
 
 
 @Component({
@@ -66,8 +66,9 @@ export class HomeRouteComponent {
         ),
       ),
     )
-      .pipe<boolean, boolean>(
-        startWith<boolean>(true),
+      .pipe<boolean, boolean, boolean>(
+        startWith<boolean, [true]>(true),
+        distinctUntilChanged<boolean>(),
         takeUntilDestroyed<boolean>(),
       )
       .subscribe(
@@ -82,7 +83,8 @@ export class HomeRouteComponent {
               .open(
                 BottomSheetComponent,
                 {
-                  hasBackdrop: false,
+                  disableClose: true,
+                  hasBackdrop:  false,
                 },
               );
           })();
