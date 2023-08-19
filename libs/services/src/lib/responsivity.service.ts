@@ -16,15 +16,17 @@ export class ResponsivityService {
   public readonly scrollPosition$: Signal<number>;
 
   constructor(
-    @Inject(DOCUMENT)    document:   Document,
-    @Inject(PLATFORM_ID) platformId: object,
+    @Inject(DOCUMENT)    private readonly document:   Document,
+    @Inject(PLATFORM_ID) private readonly platformId: object,
 
-    breakpointObserver: BreakpointObserver,
+    private readonly breakpointObserver: BreakpointObserver,
   ) {
     this
       .colorScheme$ = isPlatformBrowser(platformId) ? toSignal<ColorScheme>(
         breakpointObserver.observe("(prefers-color-scheme: light)").pipe<ColorScheme, ColorScheme>(
-          map<BreakpointState, ColorScheme>((breakpointState: BreakpointState): ColorScheme => breakpointState.matches ? "light" : "dark"),
+          map<BreakpointState, ColorScheme>(
+            (breakpointState: BreakpointState): ColorScheme => breakpointState.matches ? "light" : "dark",
+          ),
           distinctUntilChanged<ColorScheme>(),
         ),
         {
@@ -37,7 +39,9 @@ export class ResponsivityService {
           document,
           "scroll",
         ).pipe<number, number, number>(
-          map<Event, number>((): number => document.defaultView?.scrollY || 0),
+          map<Event, number>(
+            (): number => document.defaultView?.scrollY || 0,
+          ),
           startWith<number>(document.defaultView?.scrollY || 0),
           distinctUntilChanged<number>(),
         ),

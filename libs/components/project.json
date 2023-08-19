@@ -17,24 +17,6 @@
       "outputs":  [
         "{options.outputFile}"
       ]
-    },
-    "build": {
-      "configurations":       {
-        "development": {
-          "tsConfig": "libs/components/tsconfig.lib.json"
-        },
-        "production":  {
-          "tsConfig": "libs/components/tsconfig.lib.prod.json"
-        }
-      },
-      "defaultConfiguration": "production",
-      "executor":             "@nx/angular:package",
-      "options":              {
-        "project": "libs/components/ng-package.json"
-      },
-      "outputs":              [
-        "{workspaceRoot}/dist/{projectRoot}"
-      ]
     }
   }
 }

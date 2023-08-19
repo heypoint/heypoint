@@ -13,8 +13,8 @@ export class AppCheckOptionsService {
   public readonly appCheckOptions: () => AppCheckOptions;
 
   constructor(
-    @Inject(APP_ENVIRONMENT) appEnvironment: AppEnvironment,
-    @Inject(PLATFORM_ID)     platformId:     object,
+    @Inject(APP_ENVIRONMENT) private readonly appEnvironment: AppEnvironment,
+    @Inject(PLATFORM_ID)     private readonly platformId:     object,
   ) {
     this
       .appCheckOptions = (): AppCheckOptions => isPlatformBrowser(platformId) ? {

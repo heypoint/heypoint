@@ -2,7 +2,7 @@ import { https, HttpsFunction, Response, runWith } from "firebase-functions";
 
 
 // noinspection JSUnusedGlobalSymbols
-export const endpoint: HttpsFunction = runWith(
+export const httpsFunction: HttpsFunction = runWith(
   {
     enforceAppCheck: true,
   },

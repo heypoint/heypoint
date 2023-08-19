@@ -1,12 +1,9 @@
 {
   "compilerOptions": {
-    "declaration":    true,
-    "declarationMap": true,
-    "inlineSources":  true,
-    "outDir":         "../../dist/out-tsc",
-    "types":          [
-      "google.maps",
-      "node"
+    "declaration": true,
+    "outDir":      "../../dist/out-tsc",
+    "types":       [
+      "google.maps"
     ]
   },
   "extends":         "./tsconfig.json",

@@ -49,6 +49,7 @@
     "@angular/language-service":              "^16.2.0",
     "@nguniversal/builders":                  "^16.2.0",
     "@nx/angular":                            "^16",
+    "@nx/esbuild":                            "^16",
     "@nx/eslint-plugin":                      "^16",
     "@nx/js":                                 "^16",
     "@nx/linter":                             "^16",

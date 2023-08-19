@@ -18,10 +18,10 @@ export class RootComponent implements AfterViewInit {
   @ViewChild("matSidenavStart") private readonly matSidenavStart!: MatSidenav;
 
   constructor(
+    private readonly sidenavService: SidenavService,
+
     @Inject(GIT_INFO)        public readonly gitInfo:        Partial<GitInfo>,
     @Inject(PACKAGE_VERSION) public readonly packageVersion: string,
-
-    private readonly sidenavService: SidenavService,
   ) {
   }
 

@@ -13,8 +13,8 @@ export class PathService {
   public readonly path$: Signal<string>;
 
   constructor(
-    location: Location,
-    router:   Router,
+    private readonly location: Location,
+    private readonly router:   Router,
   ) {
     this
       .path$ = toSignal<string>(

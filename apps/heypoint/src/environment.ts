@@ -1,4 +1,4 @@
-import { AppEnvironment } from "@heypoint/types";
+import { AppEnvironment } from "@heypoint/interfaces";
 
 
 export const environment: AppEnvironment = {

@@ -15,18 +15,6 @@
       "outputs":  [
         "{options.outputFile}"
       ]
-    },
-    "build": {
-      "executor": "@nx/js:tsc",
-      "options":  {
-        "assets":     [],
-        "main":       "libs/injection-tokens/src/index.ts",
-        "outputPath": "dist/libs/injection-tokens",
-        "tsConfig":   "libs/injection-tokens/tsconfig.lib.json"
-      },
-      "outputs":  [
-        "{options.outputPath}"
-      ]
     }
   }
 }

@@ -28,10 +28,10 @@ export class MapComponent {
   public readonly googleMapsAPILoaded$: Signal<boolean>;
 
   constructor(
-    @Inject(APP_ENVIRONMENT) appEnvironment: AppEnvironment,
-    @Inject(PLATFORM_ID)     platformId:     object,
+    @Inject(APP_ENVIRONMENT) private readonly appEnvironment: AppEnvironment,
+    @Inject(PLATFORM_ID)     private readonly platformId:     object,
 
-    httpClient: HttpClient,
+    private readonly httpClient: HttpClient,
 
     public readonly mapService: MapService,
   ) {

@@ -26,8 +26,8 @@ export class HomeRouteComponent {
   private matBottomSheetRef?: MatBottomSheetRef;
 
   constructor(
-    matBottomSheet: MatBottomSheet,
-    sidenavService: SidenavService,
+    private readonly matBottomSheet: MatBottomSheet,
+    private readonly sidenavService: SidenavService,
   ) {
     merge<[boolean, boolean]>(
       toObservable<MatSidenav | undefined>(sidenavService.matSidenavEnd$).pipe<MatSidenav, boolean>(

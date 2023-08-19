@@ -25,20 +25,18 @@
       "style":        "sass"
     },
     "@nx/angular:library":     {
-      "buildable":      true,
       "displayBlock":   true,
       "linter":         "eslint",
-      "publishable":    true,
       "skipModule":     true,
       "skipTests":      true,
       "standalone":     true,
       "style":          "sass",
       "unitTestRunner": "none"
     },
-    "@nx/js:library":          {
+    "@nx/js:library": {
+      "bundler":        "none",
       "linter":         "eslint",
       "minimal":        true,
-      "publishable":    true,
       "unitTestRunner": "none"
     }
   },

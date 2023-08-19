@@ -21,12 +21,12 @@ export class MapService {
   private readonly mapSubject: ReplaySubject<google.maps.Map>;
 
   constructor(
-    @Inject(APP_ENVIRONMENT) appEnvironment: AppEnvironment,
-    @Inject(PLATFORM_ID)     platformId:     object,
+    @Inject(APP_ENVIRONMENT) private readonly appEnvironment: AppEnvironment,
+    @Inject(PLATFORM_ID)     private readonly platformId:     object,
 
-    geolocationService:  GeolocationService,
-    ngZone:              NgZone,
-    responsivityService: ResponsivityService,
+    private readonly geolocationService:  GeolocationService,
+    private readonly ngZone:              NgZone,
+    private readonly responsivityService: ResponsivityService,
   ) {
     this
       .mapOptions$ = computed<google.maps.MapOptions>(

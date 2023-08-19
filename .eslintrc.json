@@ -4,11 +4,17 @@
   ],
   "overrides":      [
     {
+      "files":  [
+        "package.json"
+      ],
+      "parser": "jsonc-eslint-parser",
+      "rules":  {
+        "@nx/dependency-checks": "error"
+      }
+    },
+    {
       "files": [
-        "*.ts",
-        "*.tsx",
-        "*.js",
-        "*.jsx"
+        "*.ts"
       ],
       "rules": {
         "@nx/enforce-module-boundaries": [
@@ -33,18 +39,7 @@
         "plugin:@nx/typescript"
       ],
       "files":   [
-        "*.ts",
-        "*.tsx"
-      ],
-      "rules":   {}
-    },
-    {
-      "extends": [
-        "plugin:@nx/javascript"
-      ],
-      "files":   [
-        "*.js",
-        "*.jsx"
+        "*.ts"
       ],
       "rules":   {}
     }

@@ -15,17 +15,6 @@
       "outputs":  [
         "{options.outputFile}"
       ]
-    },
-    "build": {
-      "executor": "@nx/js:tsc",
-      "options":  {
-        "main":       "libs/interfaces/src/index.ts",
-        "outputPath": "dist/libs/interfaces",
-        "tsConfig":   "libs/interfaces/tsconfig.lib.json"
-      },
-      "outputs":  [
-        "{options.outputPath}"
-      ]
     }
   }
 }

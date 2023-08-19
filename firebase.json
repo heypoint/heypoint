@@ -6,15 +6,14 @@
   },
   "functions":  [
     {
-      "codebase": "api",
+      "codebase": "default",
       "ignore":   [
         "node_modules",
         ".git",
         "firebase-debug.log",
         "firebase-debug.*.log"
       ],
-      "runtime":  "nodejs18",
-      "source":   "dist/libs/api"
+      "source":   "dist/libs/cloud-functions"
     }
   ],
   "hosting":    {

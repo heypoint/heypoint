@@ -19,8 +19,8 @@ import { Response }                                 from "express";
 export class OtherwiseRouteComponent {
 
   constructor(
-                @Inject(PLATFORM_ID) platformId: object,
-    @Optional() @Inject(RESPONSE)    response:   Response,
+                @Inject(PLATFORM_ID) private readonly platformId: object,
+    @Optional() @Inject(RESPONSE)    private readonly response:   Response,
 
     public readonly pathService: PathService,
   ) {
