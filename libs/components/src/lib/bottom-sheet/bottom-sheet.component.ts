@@ -21,7 +21,7 @@ import { distinctUntilChanged, filter, merge, Observable, Observer, ReplaySubjec
     MatIconModule,
     MatToolbarModule,
   ],
-  selector:    "heypoint-bottom-sheet",
+  selector:    "heypoint-components-bottom-sheet",
   standalone:  true,
   styleUrls:   [
     "./bottom-sheet.component.sass",

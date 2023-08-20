@@ -9,7 +9,7 @@ import { Response }                                 from "express";
   imports:     [
     CommonModule,
   ],
-  selector:    "app-otherwise-route",
+  selector:    "heypoint-otherwise-route",
   standalone:  true,
   styleUrls:   [
     "./otherwise.route.component.sass",

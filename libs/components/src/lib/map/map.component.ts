@@ -16,7 +16,7 @@ import { distinctUntilChanged, map, startWith }                from "rxjs";
     HttpClientModule,
     HttpClientJsonpModule,
   ],
-  selector:    "heypoint-map",
+  selector:    "heypoint-components-map",
   standalone:  true,
   styleUrls:   [
     "./map.component.sass",

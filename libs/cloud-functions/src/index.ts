@@ -1,1 +1,1 @@
-export * from "./lib/httpsFunction";
+export * from "./lib/helloWorld";

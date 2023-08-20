@@ -3,9 +3,9 @@ import { Component }                                                            
 import { takeUntilDestroyed, toObservable }                                           from "@angular/core/rxjs-interop";
 import { MatBottomSheet, MatBottomSheetModule, MatBottomSheetRef }                    from "@angular/material/bottom-sheet";
 import { MatSidenav }                                                                 from "@angular/material/sidenav";
+import { BottomSheetComponent, MapComponent }                                         from "@heypoint/components";
 import { SidenavService }                                                             from "@heypoint/services";
 import { distinctUntilChanged, filter, map, merge, Observable, startWith, switchMap } from "rxjs";
-import { BottomSheetComponent, MapComponent }                                         from "@heypoint/components";
 
 
 @Component({
@@ -14,7 +14,7 @@ import { BottomSheetComponent, MapComponent }                                   
     MapComponent,
     MatBottomSheetModule,
   ],
-  selector:    "app-home-route",
+  selector:    "heypoint-home-route",
   standalone:  true,
   styleUrls:   [
     "./home.route.component.sass",

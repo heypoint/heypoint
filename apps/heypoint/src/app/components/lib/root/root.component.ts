@@ -6,7 +6,7 @@ import { GitInfo }                                     from "git-describe";
 
 
 @Component({
-  selector:    "app-root",
+  selector:    "heypoint-root",
   styleUrls:   [
     "./root.component.sass",
   ],
