@@ -1,4 +1,4 @@
-import { APP_ID, Injector, NgModule }                                                            from "@angular/core";
+import { Injector, NgModule }                                                                    from "@angular/core";
 import { Analytics, getAnalytics, provideAnalytics, ScreenTrackingService, UserTrackingService } from "@angular/fire/analytics";
 import { FirebaseApp, initializeApp, provideFirebaseApp }                                        from "@angular/fire/app";
 import { AppCheck, initializeAppCheck, provideAppCheck }                                         from "@angular/fire/app-check";
@@ -36,7 +36,7 @@ import { RootComponent }                                                        
     provideAppCheck(
       (injector: Injector): AppCheck => initializeAppCheck(
         undefined,
-        injector.get(AppCheckOptionsService).appCheckOptions(),
+        injector.get(AppCheckOptionsService).appCheckOptions,
       ),
     ),
     provideAuth(
@@ -81,10 +81,6 @@ import { RootComponent }                                                        
     provideClientHydration(),
     ScreenTrackingService,
     UserTrackingService,
-    {
-      provide:  APP_ID,
-      useValue: "serverApp",
-    },
     {
       provide:  APP_ENVIRONMENT,
       useValue: environment,

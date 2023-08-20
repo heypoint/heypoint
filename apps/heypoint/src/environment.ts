@@ -13,5 +13,5 @@ export const environment: AppEnvironment = {
     storageBucket:     "heypoint-94e8e.appspot.com",
   },
   production:       false,
-  recaptchaSiteKey: "6Lcm8lInAAAAAAv07fUiRmla4mGCG816OCJfb07g",
+  recaptchaSiteKey: "6LeEo78nAAAAAKC-sDEKmHz6N9d-Yl7lvfcHibHc",
 };

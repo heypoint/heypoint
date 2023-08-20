@@ -53,7 +53,7 @@
           "fileReplacements": [
             {
               "replace": "apps/heypoint/src/environment.ts",
-              "with":    "apps/heypoint/src/environment.production.ts"
+              "with":    "apps/heypoint/src/environment.prod.ts"
             }
           ],
           "outputHashing":    "all"
@@ -100,7 +100,7 @@
           "fileReplacements": [
             {
               "replace": "apps/heypoint/src/environment.ts",
-              "with":    "apps/heypoint/src/environment.production.ts"
+              "with":    "apps/heypoint/src/environment.prod.ts"
             }
           ],
           "outputHashing":    "media"
@@ -127,7 +127,7 @@
         "fileReplacements": [
           {
             "replace": "apps/heypoint/src/environment.ts",
-            "with":    "apps/heypoint/src/environment.production.ts"
+            "with":    "apps/heypoint/src/environment.prod.ts"
           }
         ],
         "outputHashing":    "media"
