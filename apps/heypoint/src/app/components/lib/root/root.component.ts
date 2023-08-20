@@ -14,8 +14,8 @@ import { GitInfo }                                     from "git-describe";
 })
 export class RootComponent implements AfterViewInit {
 
-  @ViewChild("matSidenavEnd")   private readonly matSidenavEnd!:   MatSidenav;
-  @ViewChild("matSidenavStart") private readonly matSidenavStart!: MatSidenav;
+  @ViewChild("endMatSidenav")   private readonly endMatSidenav?:   MatSidenav;
+  @ViewChild("startMatSidenav") private readonly startMatSidenav?: MatSidenav;
 
   constructor(
     private readonly sidenavService: SidenavService,
@@ -30,8 +30,8 @@ export class RootComponent implements AfterViewInit {
       .sidenavService
       .viewInitializedHandler(
         {
-          matSidenavEnd:   this.matSidenavEnd,
-          matSidenavStart: this.matSidenavStart,
+          endMatSidenav:   this.endMatSidenav,
+          startMatSidenav: this.startMatSidenav,
         },
       );
   }

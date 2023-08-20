@@ -1,7 +1,7 @@
-import { Injectable, Signal }                             from "@angular/core";
-import { toSignal }                                       from "@angular/core/rxjs-interop";
-import { MatSidenav }                                     from "@angular/material/sidenav";
-import { distinctUntilChanged, ReplaySubject, startWith } from "rxjs";
+import { Injectable, Signal }            from "@angular/core";
+import { toSignal }                      from "@angular/core/rxjs-interop";
+import { MatSidenav }                                from "@angular/material/sidenav";
+import { map, Observable, ReplaySubject, startWith } from "rxjs";
 
 
 @Injectable({
@@ -9,49 +9,46 @@ import { distinctUntilChanged, ReplaySubject, startWith } from "rxjs";
 })
 export class SidenavService {
 
-  public readonly matSidenavEnd$:   Signal<MatSidenav | undefined>;
-  public readonly matSidenavStart$: Signal<MatSidenav | undefined>;
+  private readonly matSidenavsSubject: ReplaySubject<{ "startMatSidenav"?: MatSidenav, "endMatSidenav"?: MatSidenav }>;
 
-  public readonly viewInitializedHandler: (options: { "matSidenavEnd": MatSidenav, "matSidenavStart": MatSidenav }) => void;
+  public readonly endMatSidenav$:        Signal<MatSidenav | undefined>;
+  public readonly startMatSidenav$:      Signal<MatSidenav | undefined>;
 
-  private readonly matSidenavEndSubject:   ReplaySubject<MatSidenav>;
-  private readonly matSidenavStartSubject: ReplaySubject<MatSidenav>;
+  public readonly matSidenavsObservable: Observable<{ "startMatSidenav"?: MatSidenav, "endMatSidenav"?: MatSidenav }>;
+
+  public readonly viewInitializedHandler: (matSidenavs: { "startMatSidenav"?: MatSidenav, "endMatSidenav"?: MatSidenav }) => void;
 
   constructor() {
     this
-      .matSidenavEndSubject = new ReplaySubject<MatSidenav>(1);
+      .matSidenavsSubject = new ReplaySubject<{ "startMatSidenav"?: MatSidenav, "endMatSidenav"?: MatSidenav }>(1);
     this
-      .matSidenavEnd$ = toSignal<MatSidenav | undefined>(
-        this.matSidenavEndSubject.asObservable().pipe<MatSidenav | undefined, MatSidenav | undefined>(
+      .endMatSidenav$ = toSignal<MatSidenav | undefined>(
+        this.matSidenavsSubject.asObservable().pipe<MatSidenav | undefined, MatSidenav | undefined>(
+          map<{ "startMatSidenav"?: MatSidenav, "endMatSidenav"?: MatSidenav }, MatSidenav | undefined>((matSidenavs: { "startMatSidenav"?: MatSidenav, "endMatSidenav"?: MatSidenav }): MatSidenav | undefined => matSidenavs.endMatSidenav),
           startWith<MatSidenav | undefined>(undefined),
-          distinctUntilChanged<MatSidenav | undefined>(),
         ),
         {
           requireSync: true,
         },
       );
     this
-      .viewInitializedHandler = (options: { "matSidenavEnd": MatSidenav, "matSidenavStart": MatSidenav }): void => {
-        this
-          .matSidenavEndSubject
-          .next(options.matSidenavEnd);
-
-        this
-          .matSidenavStartSubject
-          .next(options.matSidenavStart);
-      };
-    this
-      .matSidenavStartSubject = new ReplaySubject<MatSidenav>(1);
-    this
-      .matSidenavStart$ = toSignal<MatSidenav | undefined>(
-        this.matSidenavStartSubject.asObservable().pipe<MatSidenav | undefined, MatSidenav | undefined>(
+      .startMatSidenav$ = toSignal<MatSidenav | undefined>(
+        this.matSidenavsSubject.asObservable().pipe<MatSidenav | undefined, MatSidenav | undefined>(
+          map<{ "startMatSidenav"?: MatSidenav, "endMatSidenav"?: MatSidenav }, MatSidenav | undefined>((matSidenavs: { "startMatSidenav"?: MatSidenav, "endMatSidenav"?: MatSidenav }): MatSidenav | undefined => matSidenavs.startMatSidenav),
           startWith<MatSidenav | undefined, [ undefined ]>(undefined),
-          distinctUntilChanged<MatSidenav | undefined>(),
         ),
         {
           requireSync: true,
         },
       );
+    this
+      .matSidenavsObservable = this
+      .matSidenavsSubject
+      .asObservable();
+    this
+      .viewInitializedHandler = (matSidenavs: { "startMatSidenav"?: MatSidenav, "endMatSidenav"?: MatSidenav }) => this
+      .matSidenavsSubject
+      .next(matSidenavs);
   }
 
 }

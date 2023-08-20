@@ -2,7 +2,7 @@
   <mat-toolbar-row>
     <button
       mat-raised-button=""
-      (click)="sidenavService.matSidenavStart$()?.open();">
+      (click)="sidenavService.startMatSidenav$()?.open();">
       <mat-icon>person</mat-icon>
     </button>
     <mat-card>
@@ -15,7 +15,7 @@
     </mat-card>
     <button
       mat-raised-button=""
-      (click)="sidenavService.matSidenavEnd$()?.open();">
+      (click)="sidenavService.endMatSidenav$()?.open();">
       <mat-icon>more_horiz</mat-icon>
     </button>
   </mat-toolbar-row>
@@ -24,7 +24,7 @@
   <div>
     <div>
       <button
-        #academicBuildingsButton
+        #academicBuildingsMatButton
         color="primary"
         mat-fab="">
         <mat-icon>school</mat-icon>
@@ -37,7 +37,7 @@
     </div>
     <div>
       <button
-        #residenceHallsButton
+        #residenceHallsMatButton
         color="primary"
         mat-fab="">
         <mat-icon>house</mat-icon>
@@ -50,7 +50,7 @@
     </div>
     <div>
       <button
-        #savedPlacesButton
+        #savedPlacesMatButton
         color="primary"
         mat-fab="">
         <mat-icon>bookmarks</mat-icon>
@@ -65,13 +65,13 @@
   <mat-divider></mat-divider>
   <div>
     <button
-      #postButton
+      #postMatButton
       mat-stroked-button="">
       <mat-icon>add</mat-icon>
       post
     </button>
     <button
-      #exploreButton
+      #exploreMatButton
       mat-stroked-button="">
       <mat-icon>{{ expanded$() ? "expand_more" : "expand_less" }}</mat-icon>
       explore

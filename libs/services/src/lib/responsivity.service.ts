@@ -12,7 +12,7 @@ type ColorScheme = "light" | "dark";
 })
 export class ResponsivityService {
 
-  public readonly colorScheme$: Signal<ColorScheme>;
+  public readonly colorScheme$:    Signal<ColorScheme>;
   public readonly scrollPosition$: Signal<number>;
 
   constructor(

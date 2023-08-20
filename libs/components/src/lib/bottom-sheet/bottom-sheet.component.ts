@@ -1,14 +1,14 @@
-import { CommonModule, isPlatformBrowser }                                                                                     from "@angular/common";
-import { AfterViewInit, Component, Inject, PLATFORM_ID, Renderer2, signal, Signal, ViewChild }                                 from "@angular/core";
-import { takeUntilDestroyed, toSignal }                                                                                        from "@angular/core/rxjs-interop";
-import { MatButton, MatButtonModule, MatFabButton }                                                                            from "@angular/material/button";
-import { MatCardModule }                                                                                                       from "@angular/material/card";
-import { MatDividerModule }                                                                                                    from "@angular/material/divider";
-import { MatExpansionModule }                                                                                                  from "@angular/material/expansion";
-import { MatIconModule }                                                                                                       from "@angular/material/icon";
-import { MatToolbarModule }                                                                                                    from "@angular/material/toolbar";
-import { MapService, SidenavService }                                                                                          from "@heypoint/services";
-import { distinctUntilChanged, filter, merge, Observable, Observer, ReplaySubject, scan, startWith, switchMap, TeardownLogic } from "rxjs";
+import { CommonModule, isPlatformBrowser }                                                                                          from "@angular/common";
+import { AfterViewInit, Component, Inject, PLATFORM_ID, Renderer2, signal, Signal, ViewChild }                                      from "@angular/core";
+import { takeUntilDestroyed, toSignal }                                                                                             from "@angular/core/rxjs-interop";
+import { MatButton, MatButtonModule, MatFabButton }                                                                                 from "@angular/material/button";
+import { MatCardModule }                                                                                                            from "@angular/material/card";
+import { MatDividerModule }                                                                                                         from "@angular/material/divider";
+import { MatExpansionModule }                                                                                                       from "@angular/material/expansion";
+import { MatIconModule }                                                                                                            from "@angular/material/icon";
+import { MatToolbarModule }                                                                                                         from "@angular/material/toolbar";
+import { MapService, SidenavService }                                                                                               from "@heypoint/services";
+import { distinctUntilChanged, filter, map, merge, Observable, Observer, ReplaySubject, scan, startWith, switchMap, TeardownLogic } from "rxjs";
 
 
 @Component({
@@ -30,13 +30,13 @@ import { distinctUntilChanged, filter, merge, Observable, Observer, ReplaySubjec
 })
 export class BottomSheetComponent implements AfterViewInit {
 
-  @ViewChild("academicBuildingsButton") private readonly academicBuildingsButton?: MatFabButton;
-  @ViewChild("residenceHallsButton")    private readonly residenceHallsButton?:    MatFabButton;
-  @ViewChild("savedPlacesButton")       private readonly savedPlacesButton?:       MatFabButton;
-  @ViewChild("postButton")              private readonly postButton?:              MatButton;
-  @ViewChild("exploreButton")           private readonly exploreButton?:           MatButton;
+  @ViewChild("academicBuildingsMatButton") private readonly academicBuildingsMatButton?: MatFabButton;
+  @ViewChild("residenceHallsMatButton")    private readonly residenceHallsMatButton?:    MatFabButton;
+  @ViewChild("savedPlacesMatButton")       private readonly savedPlacesMatButton?:       MatFabButton;
+  @ViewChild("postMatButton")              private readonly postMatButton?:              MatButton;
+  @ViewChild("exploreMatButton")           private readonly exploreMatButton?:           MatButton;
 
-  private readonly buttonsSubject: ReplaySubject<{ "academicBuildingsButton"?: MatFabButton, "residenceHallsButton"?: MatFabButton, "savedPlacesButton"?: MatFabButton, "postButton"?: MatButton, "exploreButton"?: MatButton }>;
+  private readonly matButtonsSubject: ReplaySubject<{ "academicBuildingsMatButton"?: MatFabButton, "residenceHallsMatButton"?: MatFabButton, "savedPlacesMatButton"?: MatFabButton, "postMatButton"?: MatButton, "exploreMatButton"?: MatButton }>;
 
   public readonly expanded$: Signal<boolean>;
 
@@ -49,54 +49,55 @@ export class BottomSheetComponent implements AfterViewInit {
     public readonly sidenavService: SidenavService,
   ) {
     this
-      .buttonsSubject = new ReplaySubject<{ "academicBuildingsButton"?: MatFabButton, "residenceHallsButton"?: MatFabButton, "savedPlacesButton"?: MatFabButton, "postButton"?: MatButton, "exploreButton"?: MatButton }>(1);
+      .matButtonsSubject = new ReplaySubject<{ "academicBuildingsMatButton"?: MatFabButton, "residenceHallsMatButton"?: MatFabButton, "savedPlacesMatButton"?: MatFabButton, "postMatButton"?: MatButton, "exploreMatButton"?: MatButton }>(1);
     this
       .expanded$ = isPlatformBrowser(platformId) ? toSignal<boolean>(
-        this.buttonsSubject.asObservable().pipe<{ "academicBuildingsButton": MatFabButton, "residenceHallsButton": MatFabButton, "savedPlacesButton": MatFabButton, "postButton": MatButton, "exploreButton": MatButton }, boolean, boolean, boolean, boolean>(
-          filter<{ "academicBuildingsButton"?: MatFabButton, "residenceHallsButton"?: MatFabButton, "savedPlacesButton"?: MatFabButton, "postButton"?: MatButton, "exploreButton"?: MatButton }, { "academicBuildingsButton": MatFabButton, "residenceHallsButton": MatFabButton, "savedPlacesButton": MatFabButton, "postButton": MatButton, "exploreButton": MatButton }>(
-            (buttons: { "academicBuildingsButton"?: MatFabButton, "residenceHallsButton"?: MatFabButton, "savedPlacesButton"?: MatFabButton, "postButton"?: MatButton, "exploreButton"?: MatButton }): buttons is { "academicBuildingsButton": MatFabButton, "residenceHallsButton": MatFabButton, "savedPlacesButton": MatFabButton, "postButton": MatButton, "exploreButton": MatButton } => !(!buttons.academicBuildingsButton || !buttons.residenceHallsButton || !buttons.savedPlacesButton || !buttons.postButton || !buttons.exploreButton),
+        this.matButtonsSubject.asObservable().pipe<{ "academicBuildingsMatButton": MatFabButton, "residenceHallsMatButton": MatFabButton, "savedPlacesMatButton": MatFabButton, "postMatButton": MatButton, "exploreMatButton": MatButton }, boolean, boolean, boolean, boolean>(
+          filter<{ "academicBuildingsMatButton"?: MatFabButton, "residenceHallsMatButton"?: MatFabButton, "savedPlacesMatButton"?: MatFabButton, "postMatButton"?: MatButton, "exploreMatButton"?: MatButton }, { "academicBuildingsMatButton": MatFabButton, "residenceHallsMatButton": MatFabButton, "savedPlacesMatButton": MatFabButton, "postMatButton": MatButton, "exploreMatButton": MatButton }>(
+            (buttons: { "academicBuildingsMatButton"?: MatFabButton, "residenceHallsMatButton"?: MatFabButton, "savedPlacesMatButton"?: MatFabButton, "postMatButton"?: MatButton, "exploreMatButton"?: MatButton }): buttons is { "academicBuildingsMatButton": MatFabButton, "residenceHallsMatButton": MatFabButton, "savedPlacesMatButton": MatFabButton, "postMatButton": MatButton, "exploreMatButton": MatButton } => !(!buttons.academicBuildingsMatButton || !buttons.residenceHallsMatButton || !buttons.savedPlacesMatButton || !buttons.postMatButton || !buttons.exploreMatButton),
           ),
-          switchMap<{ "academicBuildingsButton": MatFabButton, "residenceHallsButton": MatFabButton, "savedPlacesButton": MatFabButton, "postButton": MatButton, "exploreButton": MatButton }, Observable<boolean>>(
-            (buttons: { "academicBuildingsButton": MatFabButton, "residenceHallsButton": MatFabButton, "savedPlacesButton": MatFabButton, "postButton": MatButton, "exploreButton": MatButton }): Observable<boolean> => merge<[ true, true, true, true, void, false ]>(
+          switchMap<{ "academicBuildingsMatButton": MatFabButton, "residenceHallsMatButton": MatFabButton, "savedPlacesMatButton": MatFabButton, "postMatButton": MatButton, "exploreMatButton": MatButton }, Observable<boolean>>(
+            (buttons: { "academicBuildingsMatButton": MatFabButton, "residenceHallsMatButton": MatFabButton, "savedPlacesMatButton": MatFabButton, "postMatButton": MatButton, "exploreMatButton": MatButton }): Observable<boolean> => merge<[ true, true, true, true, void, false ]>(
               new Observable<true>(
                 (buttonEventObserver: Observer<true>): TeardownLogic => renderer2.listen(
-                  buttons.academicBuildingsButton._elementRef.nativeElement,
+                  buttons.academicBuildingsMatButton._elementRef.nativeElement,
                   "click",
                   (): void => buttonEventObserver.next(true),
                 ),
               ),
               new Observable<true>(
                 (buttonEventObserver: Observer<true>): TeardownLogic => renderer2.listen(
-                  buttons.residenceHallsButton._elementRef.nativeElement,
+                  buttons.residenceHallsMatButton._elementRef.nativeElement,
                   "click",
                   (): void => buttonEventObserver.next(true),
                 ),
               ),
               new Observable<true>(
                 (buttonEventObserver: Observer<true>): TeardownLogic => renderer2.listen(
-                  buttons.savedPlacesButton._elementRef.nativeElement,
+                  buttons.savedPlacesMatButton._elementRef.nativeElement,
                   "click",
                   (): void => buttonEventObserver.next(true),
                 ),
               ),
               new Observable<true>(
                 (buttonEventObserver: Observer<true>): TeardownLogic => renderer2.listen(
-                  buttons.postButton._elementRef.nativeElement,
+                  buttons.postMatButton._elementRef.nativeElement,
                   "click",
                   (): void => buttonEventObserver.next(true),
                 ),
               ),
               new Observable<void>(
                 (buttonEventObserver: Observer<void>): TeardownLogic => renderer2.listen(
-                  buttons.exploreButton._elementRef.nativeElement,
+                  buttons.exploreMatButton._elementRef.nativeElement,
                   "click",
                   (): void => buttonEventObserver.next(),
                 ),
               ),
-              mapService.mapHasInteractionObservable.pipe<false>(
-                filter<boolean, false>(
-                  (mapHasInteraction: boolean): mapHasInteraction is false => !mapHasInteraction,
+              mapService.mapHasInteractionObservable.pipe<true, false>(
+                filter<boolean, true>(
+                  (mapHasInteraction: boolean): mapHasInteraction is true => mapHasInteraction,
                 ),
+                map<true, false>((mapHasInteraction: true) => !mapHasInteraction),
               ),
             ).pipe<boolean>(
               scan<boolean | void, boolean>(
@@ -118,14 +119,14 @@ export class BottomSheetComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this
-      .buttonsSubject
+      .matButtonsSubject
       .next(
         {
-          academicBuildingsButton: this.academicBuildingsButton,
-          residenceHallsButton:    this.residenceHallsButton,
-          savedPlacesButton:       this.savedPlacesButton,
-          postButton:              this.postButton,
-          exploreButton:           this.exploreButton,
+          academicBuildingsMatButton: this.academicBuildingsMatButton,
+          residenceHallsMatButton:    this.residenceHallsMatButton,
+          savedPlacesMatButton:       this.savedPlacesMatButton,
+          postMatButton:              this.postMatButton,
+          exploreMatButton:           this.exploreMatButton,
         },
       );
   }

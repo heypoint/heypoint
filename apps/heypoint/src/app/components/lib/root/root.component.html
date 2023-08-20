@@ -1,15 +1,17 @@
 <mat-sidenav-container>
   <mat-sidenav
-    #matSidenavStart
+    #startMatSidenav
     mode="over"
     position="start">
-    sidenav...
+    <p>
+      Heypoint v{{ packageVersion + (gitInfo.dirty ? "-next" : "") }}+<a [href]="'https://github.com/heypoint/heypoint/commit/' + gitInfo.hash">{{ gitInfo.hash }}</a>
+    </p>
   </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet />
   </mat-sidenav-content>
   <mat-sidenav
-    #matSidenavEnd
+    #endMatSidenav
     mode="over"
     position="end">
     <p>

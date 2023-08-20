@@ -1,11 +1,11 @@
-import { CommonModule }                                                               from "@angular/common";
-import { Component }                                                                  from "@angular/core";
-import { takeUntilDestroyed, toObservable }                                           from "@angular/core/rxjs-interop";
-import { MatBottomSheet, MatBottomSheetModule, MatBottomSheetRef }                    from "@angular/material/bottom-sheet";
-import { MatSidenav }                                                                 from "@angular/material/sidenav";
-import { BottomSheetComponent, MapComponent }                                         from "@heypoint/components";
-import { SidenavService }                                                             from "@heypoint/services";
-import { distinctUntilChanged, filter, map, merge, Observable, startWith, switchMap } from "rxjs";
+import { CommonModule }                                            from "@angular/common";
+import { Component }                                               from "@angular/core";
+import { takeUntilDestroyed }                                      from "@angular/core/rxjs-interop";
+import { MatBottomSheet, MatBottomSheetModule, MatBottomSheetRef } from "@angular/material/bottom-sheet";
+import { MatSidenav }                                              from "@angular/material/sidenav";
+import { BottomSheetComponent, MapComponent }                      from "@heypoint/components";
+import { SidenavService }                                          from "@heypoint/services";
+import { filter, map, merge, Observable, startWith, switchMap }    from "rxjs";
 
 
 @Component({
@@ -29,45 +29,37 @@ export class HomeRouteComponent {
     private readonly matBottomSheet: MatBottomSheet,
     private readonly sidenavService: SidenavService,
   ) {
-    merge<[boolean, boolean]>(
-      toObservable<MatSidenav | undefined>(sidenavService.matSidenavEnd$).pipe<MatSidenav, boolean>(
-        filter<MatSidenav | undefined, MatSidenav>((matSidenav: MatSidenav | undefined): matSidenav is MatSidenav => matSidenav instanceof MatSidenav),
-        switchMap<MatSidenav, Observable<boolean>>(
-          (matSidenav: MatSidenav): Observable<boolean> => merge<[boolean, boolean]>(
-            matSidenav.closedStart.pipe<boolean>(
+    sidenavService
+      .matSidenavsObservable
+      .pipe<{ "startMatSidenav": MatSidenav, "endMatSidenav": MatSidenav }, boolean, boolean, boolean>(
+        filter<{ "startMatSidenav"?: MatSidenav, "endMatSidenav"?: MatSidenav }, { "startMatSidenav": MatSidenav, "endMatSidenav": MatSidenav }>(
+          (matSidenavs: { "startMatSidenav"?: MatSidenav, "endMatSidenav"?: MatSidenav }): matSidenavs is { "startMatSidenav": MatSidenav, "endMatSidenav": MatSidenav } => !(!matSidenavs.startMatSidenav || !matSidenavs.endMatSidenav),
+        ),
+        switchMap<{ "startMatSidenav": MatSidenav, "endMatSidenav": MatSidenav }, Observable<boolean>>(
+          (matSidenavs: { "startMatSidenav": MatSidenav, "endMatSidenav": MatSidenav }): Observable<boolean> => merge<[boolean, boolean, boolean, boolean]>(
+            matSidenavs.endMatSidenav.closedStart.pipe<boolean>(
               map<void, boolean>(
                 (): boolean => true,
               ),
             ),
-            matSidenav.openedStart.pipe<boolean>(
+            matSidenavs.endMatSidenav.openedStart.pipe<boolean>(
+              map<void, boolean>(
+                (): boolean => false,
+              ),
+            ),
+            matSidenavs.startMatSidenav.closedStart.pipe<boolean>(
+              map<void, boolean>(
+                (): boolean => true,
+              ),
+            ),
+            matSidenavs.startMatSidenav.openedStart.pipe<boolean>(
               map<void, boolean>(
                 (): boolean => false,
               ),
             ),
           ),
         ),
-      ),
-      toObservable<MatSidenav | undefined>(sidenavService.matSidenavStart$).pipe<MatSidenav, boolean>(
-        filter<MatSidenav | undefined, MatSidenav>((matSidenav: MatSidenav | undefined): matSidenav is MatSidenav => matSidenav instanceof MatSidenav),
-        switchMap<MatSidenav, Observable<boolean>>(
-          (matSidenav: MatSidenav): Observable<boolean> => merge<[boolean, boolean]>(
-            matSidenav.closedStart.pipe<boolean>(
-              map<void, boolean>(
-                (): boolean => true,
-              ),
-            ),
-            matSidenav.openedStart.pipe<boolean>(
-              map<void, boolean>(
-                (): boolean => false,
-              ),
-            ),
-          ),
-        ),
-      ),
-    )
-      .pipe<boolean, boolean, boolean>(
         startWith<boolean, [true]>(true),
-        distinctUntilChanged<boolean>(),
         takeUntilDestroyed<boolean>(),
       )
       .subscribe(

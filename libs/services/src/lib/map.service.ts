@@ -1,9 +1,9 @@
 import { isPlatformBrowser }                                                                                                from "@angular/common";
-import { computed, Inject, Injectable, NgZone, PLATFORM_ID, signal, Signal }                                                from "@angular/core";
-import { toSignal }                                                                                                         from "@angular/core/rxjs-interop";
-import { APP_ENVIRONMENT }                                                                                                  from "@heypoint/injection-tokens";
+import { computed, Inject, Injectable, NgZone, PLATFORM_ID, signal, Signal } from "@angular/core";
+import { takeUntilDestroyed, toSignal }                                      from "@angular/core/rxjs-interop";
+import { APP_ENVIRONMENT }                                                   from "@heypoint/injection-tokens";
 import { AppEnvironment }                                                                                                   from "@heypoint/interfaces";
-import { delay, distinctUntilChanged, merge, Observable, Observer, of, ReplaySubject, startWith, switchMap, TeardownLogic } from "rxjs";
+import { delay, merge, Observable, Observer, of, ReplaySubject, startWith, switchMap, TeardownLogic }                       from "rxjs";
 import { GeolocationService, ResponsivityService }                                                                          from "../";
 
 
@@ -140,7 +140,7 @@ export class MapService {
           ),
         ),
         startWith<boolean, [ false ]>(false),
-        distinctUntilChanged<boolean>(),
+        takeUntilDestroyed<boolean>(),
       );
     this
       .mapHasInteraction$ = isPlatformBrowser(platformId) ? toSignal<boolean>(
