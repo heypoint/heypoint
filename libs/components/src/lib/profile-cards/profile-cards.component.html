@@ -1,0 +1,34 @@
+<mat-card>
+  <mat-card-actions>
+    <button
+      color="primary"
+      mat-raised-button>
+      <mat-icon class="material-symbols-rounded">
+        passkey
+      </mat-icon>
+      Sign in with Passkey
+    </button>
+    <button
+      color="primary"
+      mat-stroked-button
+      (click)="expansionPanel.toggle()">
+      <mat-icon class="material-symbols-rounded">
+        password
+      </mat-icon>
+      Sign in with Password
+    </button>
+  </mat-card-actions>
+  <mat-card-content>
+    <mat-expansion-panel
+      #expansionPanel
+      class="flat">
+      <ng-template matExpansionPanelContent>
+        <div>
+          <p>
+            password form...
+          </p>
+        </div>
+      </ng-template>
+    </mat-expansion-panel>
+  </mat-card-content>
+</mat-card>

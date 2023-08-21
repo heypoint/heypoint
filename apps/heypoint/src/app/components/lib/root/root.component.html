@@ -3,9 +3,7 @@
     #startMatSidenav
     mode="over"
     position="start">
-    <p>
-      Heypoint v{{ packageVersion + (gitInfo.dirty ? "-next" : "") }}+<a [href]="'https://github.com/heypoint/heypoint/commit/' + gitInfo.hash">{{ gitInfo.hash }}</a>
-    </p>
+    <heypoint-components-profile-cards />
   </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet />
@@ -14,8 +12,6 @@
     #endMatSidenav
     mode="over"
     position="end">
-    <p>
-      Heypoint v{{ packageVersion + (gitInfo.dirty ? "-next" : "") }}+<a [href]="'https://github.com/heypoint/heypoint/commit/' + gitInfo.hash">{{ gitInfo.hash }}</a>
-    </p>
+    <heypoint-components-info-cards />
   </mat-sidenav>
 </mat-sidenav-container>

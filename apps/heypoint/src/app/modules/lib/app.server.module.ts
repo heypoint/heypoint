@@ -1,7 +1,7 @@
 import { NgModule }         from "@angular/core";
 import { ServerModule }     from "@angular/platform-server";
 import { RootComponent }    from "../../components";
-import { AppBrowserModule } from "./app.browser.module";
+import { AppBrowserModule } from "../../modules";
 
 
 @NgModule({

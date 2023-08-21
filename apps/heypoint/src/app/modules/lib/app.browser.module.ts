@@ -9,8 +9,9 @@ import { ReactiveFormsModule }                                                  
 import { MatSidenavModule }                                                                      from "@angular/material/sidenav";
 import { BrowserModule, provideClientHydration }                                                 from "@angular/platform-browser";
 import { BrowserAnimationsModule }                                                               from "@angular/platform-browser/animations";
-import { RouterModule }                                                                          from "@angular/router";
-import { APP_ENVIRONMENT, GIT_INFO, PACKAGE_VERSION }                                            from "@heypoint/injection-tokens";
+import { RouterModule }                               from "@angular/router";
+import { ProfileCardsComponent, InfoCardsComponent }  from "@heypoint/components";
+import { APP_ENVIRONMENT, GIT_INFO, PACKAGE_VERSION } from "@heypoint/injection-tokens";
 import { AppCheckOptionsService }                                                                from "@heypoint/services";
 import { TransferHttpCacheModule }                                                               from "@nguniversal/common";
 import { gitInfo }                                                                               from "../../../.git-info";
@@ -76,6 +77,8 @@ import { RootComponent }                                                        
       },
     ),
     TransferHttpCacheModule,
+    ProfileCardsComponent,
+    InfoCardsComponent,
   ],
   providers:    [
     provideClientHydration(),

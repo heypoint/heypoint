@@ -31,6 +31,32 @@ body
     &:hover
       text-decoration: underline
 
+  .mat-sidenav
+    background: transparent
+    box-shadow: none
+
+  .mat-drawer-backdrop
+    transition-property: all !important
+
+    &.mat-drawer-shown
+      backdrop-filter: saturate(2) blur(14px)
+
   .mat-bottom-sheet-container
     overflow: visible
+
+  .mat-expansion-panel.flat
+    background: transparent
+    box-shadow: none
+    overflow: hidden
+
+    .mat-expansion-panel-body
+      display: flex
+      flex-direction: row
+      padding: 0
+
+      > div
+        display: flex
+        flex-direction: column
+        flex-grow: 1
+        width: 0
 

@@ -27,6 +27,9 @@
       ],
       "@heypoint/services":         [
         "libs/services/src/index.ts"
+      ],
+      "@heypoint/types":         [
+        "libs/types/src/index.ts"
       ]
     },
     "rootDir":                ".",

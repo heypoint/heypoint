@@ -1,0 +1,7 @@
+<mat-card>
+  <mat-card-content>
+    <p>
+      Heypoint v{{ packageVersion + (gitInfo.dirty ? "-next" : "") }}+<a [href]="'https://github.com/heypoint/heypoint/commit/' + gitInfo.hash">{{ gitInfo.hash }}</a>
+    </p>
+  </mat-card-content>
+</mat-card>

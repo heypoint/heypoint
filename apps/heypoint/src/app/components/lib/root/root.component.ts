@@ -1,8 +1,6 @@
-import { AfterViewInit, Component, Inject, ViewChild } from "@angular/core";
-import { MatSidenav }                                  from "@angular/material/sidenav";
-import { GIT_INFO, PACKAGE_VERSION }                   from "@heypoint/injection-tokens";
-import { SidenavService }                              from "@heypoint/services";
-import { GitInfo }                                     from "git-describe";
+import { AfterViewInit, Component, ViewChild } from "@angular/core";
+import { MatSidenav }                          from "@angular/material/sidenav";
+import { SidenavService }                      from "@heypoint/services";
 
 
 @Component({
@@ -19,9 +17,6 @@ export class RootComponent implements AfterViewInit {
 
   constructor(
     private readonly sidenavService: SidenavService,
-
-    @Inject(GIT_INFO)        public readonly gitInfo:        Partial<GitInfo>,
-    @Inject(PACKAGE_VERSION) public readonly packageVersion: string,
   ) {
   }
 
