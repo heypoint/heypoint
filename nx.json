@@ -33,7 +33,7 @@
       "style":          "sass",
       "unitTestRunner": "none"
     },
-    "@nx/js:library": {
+    "@nx/js:library":          {
       "bundler":        "none",
       "linter":         "eslint",
       "minimal":        true,
@@ -74,7 +74,6 @@
       "options": {
         "accessToken":         "${NX_CLOUD_ACCESS_TOKEN}",
         "cacheableOperations": [
-          "lint",
           "browser",
           "server",
           "build"

@@ -11,10 +11,7 @@
         "lintFilePatterns": [
           "libs/interfaces/**/*.ts"
         ]
-      },
-      "outputs":  [
-        "{options.outputFile}"
-      ]
+      }
     }
   }
 }

@@ -25,6 +25,12 @@
       "extends": [
         "plugin:@nx/typescript"
       ],
+      "files":   [
+        "*.ts"
+      ],
+      "rules":   {}
+    },
+    {
       "files": [
         "*.ts"
       ],

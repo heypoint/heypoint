@@ -13,10 +13,7 @@
           "libs/components/**/*.ts",
           "libs/components/**/*.html"
         ]
-      },
-      "outputs":  [
-        "{options.outputFile}"
-      ]
+      }
     }
   }
 }

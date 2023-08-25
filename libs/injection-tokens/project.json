@@ -11,10 +11,7 @@
         "lintFilePatterns": [
           "libs/injection-tokens/**/*.ts"
         ]
-      },
-      "outputs":  [
-        "{options.outputFile}"
-      ]
+      }
     }
   }
 }

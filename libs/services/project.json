@@ -1,7 +1,6 @@
 {
   "$schema":     "../../node_modules/nx/schemas/project-schema.json",
   "name":        "services",
-  "prefix":      "heypoint",
   "projectType": "library",
   "sourceRoot":  "libs/services/src",
   "tags":        [],
@@ -10,13 +9,9 @@
       "executor": "@nx/linter:eslint",
       "options":  {
         "lintFilePatterns": [
-          "libs/services/**/*.ts",
-          "libs/services/**/*.html"
+          "libs/services/**/*.ts"
         ]
-      },
-      "outputs":  [
-        "{options.outputFile}"
-      ]
+      }
     }
   }
 }
