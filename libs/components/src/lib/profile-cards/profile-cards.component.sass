@@ -1,10 +1,22 @@
 \:host
   display: flex
   flex-direction: column
+  max-width: 100%
   padding: 14px
+  width: 29.3rem
 
-  mat-card > mat-card-actions
-    display: flex
-    flex-direction: row
-    gap: 14px
-    padding: 14px 14px 0
+  mat-card
+
+    > mat-card-actions button
+      flex-grow: 1
+
+    > mat-card-content
+
+      form
+        display: flex
+        flex-direction: column
+        padding: 14px 0 0
+
+        #expansion-panel-content
+          padding-top: 14px
+

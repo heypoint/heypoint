@@ -7,11 +7,11 @@ import { environment }            from "./environment";
 environment
   .production && enableProdMode();
 
-((bootstrap: () => void) => document.readyState === "complete" ? bootstrap() : document.addEventListener(
+(async (bootstrap: () => Promise<void>): Promise<void> => document.readyState === "complete" ? bootstrap() : document.addEventListener<"DOMContentLoaded">(
   "DOMContentLoaded",
   bootstrap,
 ))(
-  () => platformBrowserDynamic().bootstrapModule(AppBrowserModule).then<void, never>(
+  async (): Promise<void> => platformBrowserDynamic().bootstrapModule<AppBrowserModule>(AppBrowserModule).then<void, never>(
     (): void => void (0),
   ).catch<void>(
     (err): void => console.error(err),

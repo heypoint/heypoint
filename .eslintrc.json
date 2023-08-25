@@ -13,6 +13,18 @@
       }
     },
     {
+      "extends": [
+        "plugin:@nx/angular-template"
+      ],
+      "files":   [
+        "*.html"
+      ],
+      "rules":   {}
+    },
+    {
+      "extends": [
+        "plugin:@nx/typescript"
+      ],
       "files": [
         "*.ts"
       ],
@@ -33,15 +45,6 @@
           }
         ]
       }
-    },
-    {
-      "extends": [
-        "plugin:@nx/typescript"
-      ],
-      "files":   [
-        "*.ts"
-      ],
-      "rules":   {}
     }
   ],
   "plugins":        [

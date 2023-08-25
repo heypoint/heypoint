@@ -1,34 +1,50 @@
 <mat-card>
   <mat-card-actions>
     <button
-      color="primary"
-      mat-raised-button>
+      mat-raised-button
+      color="primary">
       <mat-icon class="material-symbols-rounded">
         passkey
       </mat-icon>
       Sign in with Passkey
     </button>
     <button
-      color="primary"
       mat-stroked-button
-      (click)="expansionPanel.toggle()">
+      color="primary">
       <mat-icon class="material-symbols-rounded">
         password
       </mat-icon>
       Sign in with Password
     </button>
   </mat-card-actions>
+  <mat-divider />
   <mat-card-content>
-    <mat-expansion-panel
-      #expansionPanel
-      class="flat">
-      <ng-template matExpansionPanelContent>
-        <div>
-          <p>
-            password form...
-          </p>
-        </div>
-      </ng-template>
-    </mat-expansion-panel>
+    <form [formGroup]="signInFormGroup">
+      <mat-form-field
+        appearance="outline"
+        floatLabel="always"
+        hideRequiredMarker="true">
+        <mat-label>Sign up for Heypoint</mat-label>
+        <input
+          matInput
+          formControlName="email"
+          placeholder="University email"
+          type="email" />
+        <button
+          mat-icon-button
+          matSuffix
+          [disabled]="signInFormGroup.controls.email.invalid">
+          <mat-icon class="material-symbols-rounded">
+            arrow_forward
+          </mat-icon>
+        </button>
+        <mat-error *ngIf="signInFormGroup.controls.email.errors?.['required']">
+          An email is required to continue.
+        </mat-error>
+        <mat-error *ngIf="signInFormGroup.controls.email.errors?.['university']">
+          We didn't recognize this university.
+        </mat-error>
+      </mat-form-field>
+    </form>
   </mat-card-content>
 </mat-card>

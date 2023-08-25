@@ -1,10 +1,10 @@
-import { isPlatformBrowser }                                                                                                from "@angular/common";
-import { computed, Inject, Injectable, NgZone, PLATFORM_ID, signal, Signal } from "@angular/core";
-import { takeUntilDestroyed, toSignal }                                      from "@angular/core/rxjs-interop";
-import { APP_ENVIRONMENT }                                                   from "@heypoint/injection-tokens";
-import { AppEnvironment }                                                                                                   from "@heypoint/interfaces";
-import { delay, merge, Observable, Observer, of, ReplaySubject, startWith, switchMap, TeardownLogic }                       from "rxjs";
-import { GeolocationService, ResponsivityService }                                                                          from "../";
+import { isPlatformBrowser }                                                                          from "@angular/common";
+import { computed, Inject, Injectable, NgZone, PLATFORM_ID, signal, Signal }                          from "@angular/core";
+import { takeUntilDestroyed, toSignal }                                                               from "@angular/core/rxjs-interop";
+import { APP_ENVIRONMENT }                                                                            from "@heypoint/injection-tokens";
+import { AppEnvironment }                                                                             from "@heypoint/interfaces";
+import { delay, merge, Observable, Observer, of, ReplaySubject, startWith, switchMap, TeardownLogic } from "rxjs";
+import { GeolocationService, ResponsivityService }                                                    from "../";
 
 
 @Injectable({
@@ -56,7 +56,7 @@ export class MapService {
       .mapHasInteractionObservable = this
       .mapSubject
       .asObservable()
-      .pipe<boolean, boolean, boolean>(
+      .pipe<boolean, boolean>(
         switchMap<google.maps.Map, Observable<boolean>>(
           (map: google.maps.Map): Observable<boolean> => merge<[ true, true, true, true, true, true, false, true, true ]>(
             new Observable<true>(
@@ -139,12 +139,13 @@ export class MapService {
             ),
           ),
         ),
-        startWith<boolean, [ false ]>(false),
         takeUntilDestroyed<boolean>(),
       );
     this
       .mapHasInteraction$ = isPlatformBrowser(platformId) ? toSignal<boolean>(
-        this.mapHasInteractionObservable,
+        this.mapHasInteractionObservable.pipe<boolean>(
+          startWith<boolean, [ false ]>(false)
+        ),
         {
           requireSync: true,
         },

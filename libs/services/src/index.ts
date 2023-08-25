@@ -6,3 +6,4 @@ export * from "./lib/map.service";
 export * from "./lib/path.service";
 export * from "./lib/responsivity.service";
 export * from "./lib/sidenav.service";
+export * from "./lib/universities.service";

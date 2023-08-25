@@ -1,5 +1,5 @@
-import { Injectable, Signal }            from "@angular/core";
-import { toSignal }                      from "@angular/core/rxjs-interop";
+import { Injectable, Signal }                        from "@angular/core";
+import { toSignal }                                  from "@angular/core/rxjs-interop";
 import { MatSidenav }                                from "@angular/material/sidenav";
 import { map, Observable, ReplaySubject, startWith } from "rxjs";
 
@@ -11,10 +11,9 @@ export class SidenavService {
 
   private readonly matSidenavsSubject: ReplaySubject<{ "startMatSidenav"?: MatSidenav, "endMatSidenav"?: MatSidenav }>;
 
+  public readonly matSidenavsObservable: Observable<{ "startMatSidenav"?: MatSidenav, "endMatSidenav"?: MatSidenav }>;
   public readonly endMatSidenav$:        Signal<MatSidenav | undefined>;
   public readonly startMatSidenav$:      Signal<MatSidenav | undefined>;
-
-  public readonly matSidenavsObservable: Observable<{ "startMatSidenav"?: MatSidenav, "endMatSidenav"?: MatSidenav }>;
 
   public readonly viewInitializedHandler: (matSidenavs: { "startMatSidenav"?: MatSidenav, "endMatSidenav"?: MatSidenav }) => void;
 
@@ -22,8 +21,12 @@ export class SidenavService {
     this
       .matSidenavsSubject = new ReplaySubject<{ "startMatSidenav"?: MatSidenav, "endMatSidenav"?: MatSidenav }>(1);
     this
+      .matSidenavsObservable = this
+      .matSidenavsSubject
+      .asObservable();
+    this
       .endMatSidenav$ = toSignal<MatSidenav | undefined>(
-        this.matSidenavsSubject.asObservable().pipe<MatSidenav | undefined, MatSidenav | undefined>(
+        this.matSidenavsObservable.pipe<MatSidenav | undefined, MatSidenav | undefined>(
           map<{ "startMatSidenav"?: MatSidenav, "endMatSidenav"?: MatSidenav }, MatSidenav | undefined>((matSidenavs: { "startMatSidenav"?: MatSidenav, "endMatSidenav"?: MatSidenav }): MatSidenav | undefined => matSidenavs.endMatSidenav),
           startWith<MatSidenav | undefined>(undefined),
         ),
@@ -33,7 +36,7 @@ export class SidenavService {
       );
     this
       .startMatSidenav$ = toSignal<MatSidenav | undefined>(
-        this.matSidenavsSubject.asObservable().pipe<MatSidenav | undefined, MatSidenav | undefined>(
+        this.matSidenavsObservable.pipe<MatSidenav | undefined, MatSidenav | undefined>(
           map<{ "startMatSidenav"?: MatSidenav, "endMatSidenav"?: MatSidenav }, MatSidenav | undefined>((matSidenavs: { "startMatSidenav"?: MatSidenav, "endMatSidenav"?: MatSidenav }): MatSidenav | undefined => matSidenavs.startMatSidenav),
           startWith<MatSidenav | undefined, [ undefined ]>(undefined),
         ),
@@ -41,10 +44,6 @@ export class SidenavService {
           requireSync: true,
         },
       );
-    this
-      .matSidenavsObservable = this
-      .matSidenavsSubject
-      .asObservable();
     this
       .viewInitializedHandler = (matSidenavs: { "startMatSidenav"?: MatSidenav, "endMatSidenav"?: MatSidenav }) => this
       .matSidenavsSubject

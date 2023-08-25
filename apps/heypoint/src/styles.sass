@@ -31,25 +31,44 @@ body
     &:hover
       text-decoration: underline
 
-  .mat-sidenav
-    background: transparent
-    box-shadow: none
+  mat-card
 
-  .mat-drawer-backdrop
+    > mat-card-actions
+      display: flex !important
+      flex-direction: row !important
+      gap: 14px
+      padding: 14px !important
+
+    > mat-card-content
+      display: flex !important
+      flex-direction: column !important
+      padding: 0 14px !important
+
+      &:first-child
+        padding-top: 14px !important
+
+      &:last-child
+        padding-bottom: 14px !important
+
+  mat-sidenav
+    background: transparent !important
+    box-shadow: none !important
+
+  div.mat-drawer-backdrop
     transition-property: all !important
 
     &.mat-drawer-shown
       backdrop-filter: saturate(2) blur(14px)
 
-  .mat-bottom-sheet-container
-    overflow: visible
+  mat-bottom-sheet-container
+    overflow: visible !important
 
-  .mat-expansion-panel.flat
-    background: transparent
-    box-shadow: none
-    overflow: hidden
+  mat-expansion-panel.mat-expansion-panel--flat
+    background: transparent !important
+    box-shadow: none !important
+    margin: 0 -14px !important
 
-    .mat-expansion-panel-body
+    div.mat-expansion-panel-body
       display: flex
       flex-direction: row
       padding: 0
@@ -58,5 +77,28 @@ body
         display: flex
         flex-direction: column
         flex-grow: 1
+        padding: 0 14px
         width: 0
 
+  mat-form-field
+
+    .mat-mdc-form-field-subscript-wrapper
+      height: 0
+      overflow: hidden
+
+    &.mat-mdc-form-field-has-icon-suffix
+      .mat-mdc-form-field-icon-suffix
+        padding: 0 4px
+
+    &.mat-mdc-form-field-has-icon-suffix
+      .mat-mdc-form-field-icon-prefix
+        padding: 0 4px
+
+    &.ng-touched.ng-invalid div.mat-mdc-form-field-subscript-wrapper
+      height: 24px
+
+      div.mat-mdc-form-field-error-wrapper
+        padding: 4px 0 0
+
+        mat-error::before
+          height: auto

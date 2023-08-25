@@ -27,6 +27,7 @@ export function app(): express.Express {
       ngExpressEngine(
         {
           bootstrap: AppServerModule,
+
         },
       ),
     );
