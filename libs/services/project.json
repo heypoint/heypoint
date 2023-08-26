@@ -3,7 +3,6 @@
   "name":        "services",
   "projectType": "library",
   "sourceRoot":  "libs/services/src",
-  "tags":        [],
   "targets":     {
     "lint": {
       "executor": "@nx/linter:eslint",

@@ -3,14 +3,13 @@
   "name":        "components",
   "projectType": "library",
   "sourceRoot":  "libs/components/src",
-  "tags":        [],
   "targets":     {
     "lint": {
       "executor": "@nx/linter:eslint",
       "options":  {
         "lintFilePatterns": [
-          "libs/components/**/*.ts",
-          "libs/components/**/*.html"
+          "libs/components/**/*.html",
+          "libs/components/**/*.ts"
         ]
       }
     }

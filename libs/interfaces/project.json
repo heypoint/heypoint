@@ -3,7 +3,6 @@
   "name":        "interfaces",
   "projectType": "library",
   "sourceRoot":  "libs/interfaces/src",
-  "tags":        [],
   "targets":     {
     "lint": {
       "executor": "@nx/linter:eslint",

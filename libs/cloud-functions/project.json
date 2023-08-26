@@ -3,7 +3,6 @@
   "name":        "cloud-functions",
   "projectType": "library",
   "sourceRoot":  "libs/cloud-functions/src",
-  "tags":        [],
   "targets":     {
     "lint":   {
       "executor": "@nx/linter:eslint",

@@ -3,7 +3,6 @@
   "name":        "injection-tokens",
   "projectType": "library",
   "sourceRoot":  "libs/injection-tokens/src",
-  "tags":        [],
   "targets":     {
     "lint": {
       "executor": "@nx/linter:eslint",
