@@ -3,7 +3,7 @@
   "affected":           {
     "defaultBase": "main"
   },
-  "defaultProject":     "heypoint",
+  "defaultProject":     "website",
   "generators":         {
     "@nx/angular:application": {
       "e2eTestRunner":  "none",

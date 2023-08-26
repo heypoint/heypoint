@@ -40,7 +40,7 @@
     "ignore":   [
       "**/.*"
     ],
-    "public":   "dist/apps/heypoint/browser",
+    "public":   "dist/apps/website/browser",
     "rewrites": [
       {
         "run":    {
@@ -50,6 +50,6 @@
         "source": "**"
       }
     ],
-    "target":   "heypoint"
+    "target":   "website"
   }
 }

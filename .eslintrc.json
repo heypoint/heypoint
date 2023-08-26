@@ -11,18 +11,30 @@
     },
     {
       "extends": [
-        "plugin:@nx/typescript"
+        "plugin:@nx/angular",
+        "plugin:@nx/typescript",
+        "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "files":   [
         "*.ts"
       ],
-      "rules":   {}
-    },
-    {
-      "files": [
-        "*.ts"
-      ],
-      "rules": {
+      "rules":   {
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "prefix": "heypoint",
+            "style":  "kebab-case",
+            "type":   "element"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "prefix": "heypoint",
+            "style":  "camelCase",
+            "type":   "attribute"
+          }
+        ],
         "@nx/enforce-module-boundaries": [
           "error",
           {
@@ -42,6 +54,7 @@
     }
   ],
   "plugins":   [
+    "@angular-eslint",
     "@nx"
   ],
   "root":      true

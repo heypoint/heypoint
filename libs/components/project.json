@@ -9,6 +9,7 @@
     "lint": {
       "executor": "@nx/linter:eslint",
       "options":  {
+        "eslintConfig":     "libs/components/.eslintrc.json",
         "lintFilePatterns": [
           "libs/components/**/*.ts",
           "libs/components/**/*.html"
