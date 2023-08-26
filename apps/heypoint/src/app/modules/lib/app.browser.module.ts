@@ -1,3 +1,4 @@
+import { APP_BASE_HREF }                                                                         from "@angular/common";
 import { Injector, NgModule }                                                                    from "@angular/core";
 import { Analytics, getAnalytics, provideAnalytics, ScreenTrackingService, UserTrackingService } from "@angular/fire/analytics";
 import { FirebaseApp, initializeApp, provideFirebaseApp }                                        from "@angular/fire/app";
@@ -82,6 +83,10 @@ import { RootComponent }                                                        
     provideClientHydration(),
     ScreenTrackingService,
     UserTrackingService,
+    {
+      provide: APP_BASE_HREF,
+      useValue: "/",
+    },
     {
       provide:  APP_ENVIRONMENT,
       useValue: environment,

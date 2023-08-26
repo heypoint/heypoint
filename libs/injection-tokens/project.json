@@ -5,9 +5,10 @@
   "sourceRoot":  "libs/injection-tokens/src",
   "tags":        [],
   "targets":     {
-    "lint":  {
+    "lint": {
       "executor": "@nx/linter:eslint",
       "options":  {
+        "eslintConfig":     ".eslintrc.json",
         "lintFilePatterns": [
           "libs/injection-tokens/**/*.ts"
         ]

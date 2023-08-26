@@ -1,18 +1,24 @@
 {
   "compileOnSave":   false,
   "compilerOptions": {
-    "baseUrl":                ".",
-    "declaration":            false,
-    "emitDecoratorMetadata":  true,
-    "experimentalDecorators": true,
-    "importHelpers":          true,
-    "lib":                    [
+    "baseUrl":                            ".",
+    "declaration":                        true,
+    "emitDecoratorMetadata":              true,
+    "experimentalDecorators":             true,
+    "forceConsistentCasingInFileNames":   true,
+    "importHelpers":                      true,
+    "lib":                                [
       "ES2020",
       "DOM"
     ],
-    "module":                 "ESNext",
-    "moduleResolution":       "Node",
-    "paths":                  {
+    "module":                             "ESNext",
+    "moduleResolution":                   "Node",
+    "noFallthroughCasesInSwitch":         true,
+    "noImplicitOverride":                 true,
+    "noImplicitReturns":                  true,
+    "noPropertyAccessFromIndexSignature": true,
+    "outDir":                             "dist/out-tsc",
+    "paths":                              {
       "@heypoint/cloud-functions":  [
         "libs/cloud-functions/src/index.ts"
       ],
@@ -28,15 +34,16 @@
       "@heypoint/services":         [
         "libs/services/src/index.ts"
       ],
-      "@heypoint/types":         [
+      "@heypoint/types":            [
         "libs/types/src/index.ts"
       ]
     },
-    "rootDir":                ".",
-    "skipDefaultLibCheck":    true,
-    "skipLibCheck":           true,
-    "sourceMap":              true,
-    "target":                 "ESNext"
+    "rootDir":                            ".",
+    "skipDefaultLibCheck":                true,
+    "skipLibCheck":                       true,
+    "sourceMap":                          true,
+    "strict":                             true,
+    "target":                             "ESNext"
   },
   "exclude":         [
     "node_modules",

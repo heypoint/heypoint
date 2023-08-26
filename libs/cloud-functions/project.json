@@ -5,45 +5,31 @@
   "sourceRoot":  "libs/cloud-functions/src",
   "tags":        [],
   "targets":     {
-    "updateDependencies": {
+    "lint":   {
       "executor": "@nx/linter:eslint",
       "options":  {
-        "lintFilePatterns": [
-          "libs/cloud-functions/package.json"
-        ],
-        "fix":              true
-      }
-    },
-    "lint":               {
-      "dependsOn": [
-        "updateDependencies"
-      ],
-      "executor":  "@nx/linter:eslint",
-      "options":   {
+        "eslintConfig":     ".eslintrc.json",
         "lintFilePatterns": [
           "libs/cloud-functions/**/*.ts"
         ]
       }
     },
-    "build":              {
+    "build":  {
       "dependsOn": [
-        "updateDependencies",
         "lint"
       ],
       "executor":  "@nx/esbuild:esbuild",
       "options":   {
-        "assets":     [],
         "main":       "libs/cloud-functions/main.ts",
         "outputPath": "dist/libs/cloud-functions",
-        "tsConfig":   "libs/cloud-functions/tsconfig.lib.json"
+        "tsConfig":   "tsconfig.base.json"
       },
       "outputs":   [
         "{options.outputPath}"
       ]
     },
-    "deploy":             {
+    "deploy": {
       "dependsOn": [
-        "updateDependencies",
         "lint",
         "build"
       ],

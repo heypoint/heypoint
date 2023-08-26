@@ -6,7 +6,7 @@
   "sourceRoot":  "libs/components/src",
   "tags":        [],
   "targets":     {
-    "lint":  {
+    "lint": {
       "executor": "@nx/linter:eslint",
       "options":  {
         "lintFilePatterns": [

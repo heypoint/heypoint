@@ -5,16 +5,14 @@
   "sourceRoot":  "libs/types/src",
   "tags":        [],
   "targets":     {
-    "lint":  {
+    "lint": {
       "executor": "@nx/linter:eslint",
       "options":  {
+        "eslintConfig":     ".eslintrc.json",
         "lintFilePatterns": [
           "libs/types/**/*.ts"
         ]
-      },
-      "outputs":  [
-        "{options.outputFile}"
-      ]
+      }
     }
   }
 }

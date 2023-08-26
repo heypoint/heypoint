@@ -1,17 +1,5 @@
 {
-  "ignorePatterns": [
-    "**/*"
-  ],
-  "overrides":      [
-    {
-      "files":  [
-        "package.json"
-      ],
-      "parser": "jsonc-eslint-parser",
-      "rules":  {
-        "@nx/dependency-checks": "error"
-      }
-    },
+  "overrides": [
     {
       "extends": [
         "plugin:@nx/angular-template"
@@ -53,8 +41,8 @@
       }
     }
   ],
-  "plugins":        [
+  "plugins":   [
     "@nx"
   ],
-  "root":           true
+  "root":      true
 }

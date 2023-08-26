@@ -5,9 +5,10 @@
   "sourceRoot":  "libs/services/src",
   "tags":        [],
   "targets":     {
-    "lint":  {
+    "lint": {
       "executor": "@nx/linter:eslint",
       "options":  {
+        "eslintConfig":     ".eslintrc.json",
         "lintFilePatterns": [
           "libs/services/**/*.ts"
         ]
