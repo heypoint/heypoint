@@ -1,7 +1,6 @@
 {
   "$schema":     "../../node_modules/nx/schemas/project-schema.json",
   "name":        "website",
-  "prefix":      "app",
   "projectType": "application",
   "sourceRoot":  "apps/website/src",
   "tags":        [],
@@ -80,7 +79,7 @@
         "styles":                      [
           "apps/website/src/styles.sass"
         ],
-        "tsConfig":                    "apps/website/tsconfig.json"
+        "tsConfig":                    "tsconfig.json"
       },
       "outputs":              [
         "{options.outputPath}"
@@ -116,9 +115,9 @@
       "executor":             "@angular-devkit/build-angular:server",
       "options":              {
         "inlineStyleLanguage": "sass",
-        "main":                "apps/website/src/app/main.ts",
+        "main":                "apps/website/src/app/main.server.ts",
         "outputPath":          "dist/apps/website/server",
-        "tsConfig":            "apps/website/tsconfig.json"
+        "tsConfig":            "tsconfig.json"
       },
       "production":           {
         "fileReplacements": [

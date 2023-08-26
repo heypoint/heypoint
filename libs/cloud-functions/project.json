@@ -8,7 +8,6 @@
     "lint":   {
       "executor": "@nx/linter:eslint",
       "options":  {
-        "eslintConfig":     ".eslintrc.json",
         "lintFilePatterns": [
           "libs/cloud-functions/**/*.ts"
         ]
@@ -20,9 +19,9 @@
       ],
       "executor":  "@nx/esbuild:esbuild",
       "options":   {
-        "main":       "libs/cloud-functions/main.ts",
+        "main":       "libs/cloud-functions/src/lib/main.ts",
         "outputPath": "dist/libs/cloud-functions",
-        "tsConfig":   "tsconfig.base.json"
+        "tsConfig":   "tsconfig.json"
       },
       "outputs":   [
         "{options.outputPath}"

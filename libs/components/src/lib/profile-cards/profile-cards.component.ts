@@ -49,7 +49,7 @@ export class ProfileCardsComponent {
                 Validators.required,
               ],
               asyncValidators: (abstractControl: AbstractControl<string, string>): Promise<ValidationErrors | null> => firstValueFrom<ValidationErrors | null>(
-                this.universitiesService.universityDocumentsObservable.pipe<ValidationErrors | null>(
+                universitiesService.universityDocumentsObservable.pipe<ValidationErrors | null>(
                   map<UniversityDocument[], ValidationErrors | null>(
                     (universityDocuemnts: UniversityDocument[]): ValidationErrors | null => universityDocuemnts.find(
                       (universityDocument: UniversityDocument) => universityDocument.domain === abstractControl.value.split("@")[1],

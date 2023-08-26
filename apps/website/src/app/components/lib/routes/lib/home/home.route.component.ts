@@ -3,6 +3,7 @@ import { Component }                                               from "@angula
 import { takeUntilDestroyed }                                      from "@angular/core/rxjs-interop";
 import { MatBottomSheet, MatBottomSheetModule, MatBottomSheetRef } from "@angular/material/bottom-sheet";
 import { MatSidenav }                                              from "@angular/material/sidenav";
+import { Meta }                                                    from "@angular/platform-browser";
 import { BottomSheetComponent, MapComponent }                      from "@heypoint/components";
 import { SidenavService }                                          from "@heypoint/services";
 import { filter, map, merge, Observable, startWith, switchMap }    from "rxjs";
@@ -14,7 +15,7 @@ import { filter, map, merge, Observable, startWith, switchMap }    from "rxjs";
     MapComponent,
     MatBottomSheetModule,
   ],
-  selector:    "heypoint-home-route",
+  selector:    "heypoint-website-home-route",
   standalone:  true,
   styleUrls:   [
     "./home.route.component.sass",
@@ -27,8 +28,17 @@ export class HomeRouteComponent {
 
   constructor(
     private readonly matBottomSheet: MatBottomSheet,
+    private readonly meta:           Meta,
     private readonly sidenavService: SidenavService,
   ) {
+    meta
+      .updateTag(
+        {
+          "name": "description",
+          "content": "Heypoint is a work in progress.",
+        },
+      );
+
     sidenavService
       .matSidenavsObservable
       .pipe<{ "startMatSidenav": MatSidenav, "endMatSidenav": MatSidenav }, boolean, boolean, boolean>(

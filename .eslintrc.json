@@ -2,39 +2,23 @@
   "overrides": [
     {
       "extends": [
+        "plugin:@angular-eslint/template/accessibility",
+        "plugin:@angular-eslint/template/recommended",
         "plugin:@nx/angular-template"
       ],
       "files":   [
         "*.html"
-      ],
-      "rules":   {}
+      ]
     },
     {
       "extends": [
         "plugin:@nx/angular",
-        "plugin:@nx/typescript",
-        "plugin:@angular-eslint/template/process-inline-templates"
+        "plugin:@nx/typescript"
       ],
       "files":   [
         "*.ts"
       ],
       "rules":   {
-        "@angular-eslint/component-selector": [
-          "error",
-          {
-            "prefix": "heypoint",
-            "style":  "kebab-case",
-            "type":   "element"
-          }
-        ],
-        "@angular-eslint/directive-selector": [
-          "error",
-          {
-            "prefix": "heypoint",
-            "style":  "camelCase",
-            "type":   "attribute"
-          }
-        ],
         "@nx/enforce-module-boundaries": [
           "error",
           {
