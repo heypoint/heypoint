@@ -179,7 +179,7 @@
         "firebaseHostingSite":  "heypoint-94e8e",
         "firebaseProject":      "heypoint-94e8e",
         "functionName":         "ssr-heypoint",
-        "functionsNodeVersion": "18.16",
+        "functionsNodeVersion": "18.17",
         "outputPath":           "dist/apps/website/run",
         "prerender":            true,
         "prerenderTarget":      "website:build:production",
