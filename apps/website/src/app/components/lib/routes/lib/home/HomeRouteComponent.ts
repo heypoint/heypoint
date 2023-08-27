@@ -1,8 +1,9 @@
 import { CommonModule }                                            from "@angular/common";
-import { Component }                                               from "@angular/core";
+import { Component, Input, OnInit }                                from "@angular/core";
 import { takeUntilDestroyed }                                      from "@angular/core/rxjs-interop";
 import { MatBottomSheet, MatBottomSheetModule, MatBottomSheetRef } from "@angular/material/bottom-sheet";
 import { MatSidenav }                                              from "@angular/material/sidenav";
+import { Meta }                                                    from "@angular/platform-browser";
 import { BottomSheetComponent, MapComponent }                      from "@heypoint/components";
 import { SidenavService }                                          from "@heypoint/services";
 import { filter, map, merge, Observable, startWith, switchMap }    from "rxjs";
@@ -17,16 +18,21 @@ import { filter, map, merge, Observable, startWith, switchMap }    from "rxjs";
   selector:    "heypoint-website-home-route",
   standalone:  true,
   styleUrls:   [
-    "./home.route.component.sass",
+    "./HomeRouteComponent.sass",
   ],
-  templateUrl: "./home.route.component.html",
+  templateUrl: "./HomeRouteComponent.html",
 })
-export class HomeRouteComponent {
+export class HomeRouteComponent implements OnInit {
+
+  @Input({
+    required: true
+  }) private readonly description!: string;
 
   private matBottomSheetRef?: MatBottomSheetRef;
 
   constructor(
     private readonly matBottomSheet: MatBottomSheet,
+    private readonly meta:           Meta,
     private readonly sidenavService: SidenavService,
   ) {
     sidenavService
@@ -82,4 +88,16 @@ export class HomeRouteComponent {
         },
       );
   }
+
+  ngOnInit(): void {
+    this
+      .meta
+      .updateTag(
+        {
+          "name": "description",
+          "content": this.description,
+        },
+      );
+  }
+
 }

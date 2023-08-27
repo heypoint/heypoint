@@ -3,8 +3,8 @@ import { HttpClient, HttpClientJsonpModule, HttpClientModule } from "@angular/co
 import { Component, Inject, PLATFORM_ID, signal, Signal }      from "@angular/core";
 import { toSignal }                                            from "@angular/core/rxjs-interop";
 import { GoogleMapsModule }                                    from "@angular/google-maps";
-import { APP_ENVIRONMENT }                                     from "@heypoint/injection-tokens";
-import { AppEnvironment }                                      from "@heypoint/interfaces";
+import { ENVIRONMENT }                                         from "@heypoint/injection-tokens";
+import { Environment }                                         from "@heypoint/interfaces";
 import { MapService }                                          from "@heypoint/services";
 import { distinctUntilChanged, map, startWith }                from "rxjs";
 
@@ -19,16 +19,16 @@ import { distinctUntilChanged, map, startWith }                from "rxjs";
   selector:    "heypoint-components-map",
   standalone:  true,
   styleUrls:   [
-    "./map.component.sass",
+    "./MapComponent.sass",
   ],
-  templateUrl: "./map.component.html",
+  templateUrl: "./MapComponent.html",
 })
 export class MapComponent {
 
   public readonly googleMapsAPILoaded$: Signal<boolean>;
 
   constructor(
-    @Inject(APP_ENVIRONMENT) private readonly appEnvironment: AppEnvironment,
+    @Inject(ENVIRONMENT) private readonly appEnvironment: Environment,
     @Inject(PLATFORM_ID)     private readonly platformId:     object,
 
     private readonly httpClient: HttpClient,

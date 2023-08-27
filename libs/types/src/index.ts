@@ -1,1 +1,1 @@
-export * from "./lib/ellipses";
+export * from "./lib/Ellipses";

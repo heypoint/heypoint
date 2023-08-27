@@ -13,7 +13,7 @@ import { firstValueFrom, map }                                                  
 
 
 @Component({
-  imports: [
+  imports:     [
     CommonModule,
     MatButtonModule,
     MatCardModule,
@@ -26,9 +26,9 @@ import { firstValueFrom, map }                                                  
   selector:    "heypoint-components-profile-cards",
   standalone:  true,
   styleUrls:   [
-    "./profile-cards.component.sass",
+    "./ProfileCardsComponent.sass",
   ],
-  templateUrl: "./profile-cards.component.html",
+  templateUrl: "./ProfileCardsComponent.html",
 })
 export class ProfileCardsComponent {
 
@@ -51,8 +51,8 @@ export class ProfileCardsComponent {
               asyncValidators: (abstractControl: AbstractControl<string, string>): Promise<ValidationErrors | null> => firstValueFrom<ValidationErrors | null>(
                 universitiesService.universityDocumentsObservable.pipe<ValidationErrors | null>(
                   map<UniversityDocument[], ValidationErrors | null>(
-                    (universityDocuemnts: UniversityDocument[]): ValidationErrors | null => universityDocuemnts.find(
-                      (universityDocument: UniversityDocument) => universityDocument.domain === abstractControl.value.split("@")[1],
+                    (universityDocuments: UniversityDocument[]): ValidationErrors | null => universityDocuments.find(
+                      (universityDocument: UniversityDocument): boolean => universityDocument.domain === abstractControl.value.split("@")[1],
                     ) ? null : {
                       "university": true,
                     },

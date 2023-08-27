@@ -1,15 +1,14 @@
 import { AfterViewInit, Component, ViewChild } from "@angular/core";
 import { MatSidenav }                          from "@angular/material/sidenav";
-import { Meta }                                from "@angular/platform-browser";
 import { SidenavService }                      from "@heypoint/services";
 
 
 @Component({
   selector:    "heypoint-website-root",
   styleUrls:   [
-    "./root.component.sass",
+    "./RootComponent.sass",
   ],
-  templateUrl: "./root.component.html",
+  templateUrl: "./RootComponent.html",
 })
 export class RootComponent implements AfterViewInit {
 
@@ -17,16 +16,8 @@ export class RootComponent implements AfterViewInit {
   @ViewChild("startMatSidenav") private readonly startMatSidenav?: MatSidenav;
 
   constructor(
-    private readonly meta:           Meta,
     private readonly sidenavService: SidenavService,
   ) {
-    meta
-      .updateTag(
-        {
-          "name": "description",
-          "content": "Heypoint is a work in progress.",
-        },
-      );
   }
 
   ngAfterViewInit(): void {

@@ -1,1 +1,2 @@
-export * from "./lib/root/root.component";
+export * from "./lib/root/RootComponent";
+export * from "./lib/routes";

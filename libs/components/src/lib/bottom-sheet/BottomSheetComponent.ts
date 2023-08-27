@@ -24,9 +24,9 @@ import { distinctUntilChanged, filter, map, merge, Observable, Observer, ReplayS
   selector:    "heypoint-components-bottom-sheet",
   standalone:  true,
   styleUrls:   [
-    "./bottom-sheet.component.sass",
+    "./BottomSheetComponent.sass",
   ],
-  templateUrl: "./bottom-sheet.component.html",
+  templateUrl: "./BottomSheetComponent.html",
 })
 export class BottomSheetComponent implements AfterViewInit {
 

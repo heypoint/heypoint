@@ -3,7 +3,6 @@
   "version":         "0.0.0",
   "homepage":        "https://heypoint.app",
   "license":         "Apache-2.0",
-  "private":         true,
   "author":          {
     "name":  "Gavin Sawyer",
     "email": "g@vinsawyer.dev",
@@ -13,10 +12,11 @@
     "type": "git",
     "url":  "git+https://github.com/heypoint/heypoint.git"
   },
+  "private":         true,
   "scripts":         {
+    "lint":   "npx nx run-many --target lint --all",
     "build":  "npx nx run-many --target build --all",
-    "deploy": "npx nx run-many --target deploy --all",
-    "lint":   "npx nx run-many --target lint --all"
+    "deploy": "npx nx run-many --target deploy --all"
   },
   "dependencies":    {
     "@angular/animations":               "^16.1.7",

@@ -1,8 +1,8 @@
 import { isPlatformBrowser }                                                                          from "@angular/common";
 import { computed, Inject, Injectable, NgZone, PLATFORM_ID, signal, Signal }                          from "@angular/core";
 import { takeUntilDestroyed, toSignal }                                                               from "@angular/core/rxjs-interop";
-import { APP_ENVIRONMENT }                                                                            from "@heypoint/injection-tokens";
-import { AppEnvironment }                                                                             from "@heypoint/interfaces";
+import { ENVIRONMENT }                                                                                from "@heypoint/injection-tokens";
+import { Environment }                                                                                from "@heypoint/interfaces";
 import { delay, merge, Observable, Observer, of, ReplaySubject, startWith, switchMap, TeardownLogic } from "rxjs";
 import { GeolocationService, ResponsivityService }                                                    from "../";
 
@@ -21,7 +21,7 @@ export class MapService {
   private readonly mapSubject: ReplaySubject<google.maps.Map>;
 
   constructor(
-    @Inject(APP_ENVIRONMENT) private readonly appEnvironment: AppEnvironment,
+    @Inject(ENVIRONMENT) private readonly appEnvironment: Environment,
     @Inject(PLATFORM_ID)     private readonly platformId:     object,
 
     private readonly geolocationService:  GeolocationService,

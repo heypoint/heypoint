@@ -35,6 +35,36 @@
           }
         ]
       }
+    },
+    {
+      "files":   [
+        "./apps/website/src/app/components/lib/**/*.ts"
+      ],
+      "rules":   {
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "prefix": "heypoint-website",
+            "style":  "kebab-case",
+            "type":   "element"
+          }
+        ]
+      }
+    },
+    {
+      "files":   [
+        "./libs/components/src/lib/**/*.ts"
+      ],
+      "rules":   {
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "prefix": "heypoint-components",
+            "style":  "kebab-case",
+            "type":   "element"
+          }
+        ]
+      }
     }
   ],
   "plugins":   [

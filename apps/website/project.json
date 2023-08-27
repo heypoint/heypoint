@@ -147,7 +147,9 @@
       ],
       "executor":             "@nguniversal/builders:prerender",
       "options":              {
-        "routesFile": "apps/website/src/routes.txt"
+        "routes": [
+          "/"
+        ]
       }
     },
     "serve":    {

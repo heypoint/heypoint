@@ -21,9 +21,9 @@ import { GitInfo }                   from "git-describe";
   selector:    "heypoint-components-info-cards",
   standalone:  true,
   styleUrls:   [
-    "./info-cards.component.sass",
+    "./InfoCardsComponent.sass",
   ],
-  templateUrl: "./info-cards.component.html",
+  templateUrl: "./InfoCardsComponent.html",
 })
 export class InfoCardsComponent {
   constructor(

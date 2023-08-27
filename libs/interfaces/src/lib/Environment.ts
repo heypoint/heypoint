@@ -1,4 +1,4 @@
-export interface AppEnvironment {
+export interface Environment {
   app: string,
   firebase: {
     apiKey: string,
@@ -10,5 +10,5 @@ export interface AppEnvironment {
     storageBucket: string
   },
   production: boolean,
-  recaptchaSiteKey: string,
+  recaptchaKeyID: string,
 }

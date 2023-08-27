@@ -11,13 +11,13 @@ import { BrowserModule, provideClientHydration }                                
 import { BrowserAnimationsModule }                                                               from "@angular/platform-browser/animations";
 import { RouterModule }                                                                          from "@angular/router";
 import { ProfileCardsComponent, InfoCardsComponent }                                             from "@heypoint/components";
-import { APP_ENVIRONMENT, GIT_INFO, PACKAGE_VERSION }                                            from "@heypoint/injection-tokens";
+import { ENVIRONMENT, GIT_INFO, PACKAGE_VERSION }                                                from "@heypoint/injection-tokens";
 import { AppCheckOptionsService }                                                                from "@heypoint/services";
 import { TransferHttpCacheModule }                                                               from "@nguniversal/common";
 import { gitInfo }                                                                               from "../../../.git-info";
 import { packageVersion }                                                                        from "../../../.package-version";
 import { environment }                                                                           from "../../../environment";
-import { RootComponent }                                                                         from "../../components";
+import { RootComponent, routes }                                                                 from "../../components";
 
 
 @NgModule({
@@ -53,23 +53,7 @@ import { RootComponent }                                                        
       (): Functions => getFunctions(),
     ),
     RouterModule.forRoot(
-      [
-        {
-          loadComponent: () => import("../../components/lib/routes/lib/home/home.route.component").then(
-            (m) => m.HomeRouteComponent,
-          ),
-          path:          "",
-          pathMatch:     "full",
-          title:         "Heypoint",
-        },
-        {
-          loadComponent: () => import("../../components/lib/routes/lib/otherwise/otherwise.route.component").then(
-            (m) => m.OtherwiseRouteComponent,
-          ),
-          path:          "**",
-          title:         "Heypoint | Page not found",
-        },
-      ],
+      routes,
       {
         initialNavigation:         "enabledBlocking",
         scrollPositionRestoration: "enabled",
@@ -88,7 +72,7 @@ import { RootComponent }                                                        
       useValue: "/",
     },
     {
-      provide:  APP_ENVIRONMENT,
+      provide:  ENVIRONMENT,
       useValue: environment,
     },
     {
